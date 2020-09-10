@@ -40,6 +40,8 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround' 
 Plug 'tpope/vim-repeat'
+Plug 'neomake/neomake'
+Plug 'kassio/neoterm'
 " cSpell:enable
 call plug#end()
 
@@ -99,7 +101,7 @@ tnoremap <Esc> <C-\><C-n>
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+n
 function! OpenTerminal()
-  split term://bash
+  split term
   resize 10
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
@@ -127,8 +129,6 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "
 " NERDCommenter config
 "
-" Remap
-inoremap <leader>/ :call NERDComment(0,"toggle")
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -136,6 +136,12 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+" Keybindings
+let g:NERDCreateDefaultMappings = 0
+" inoremap <leader>c <C-o>:call NERDComment(0,"toggle")<C-m>
+vnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
+nnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
+
 
 "
 " coc.nvim (autocomplete/JS stuff) config

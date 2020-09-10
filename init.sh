@@ -11,13 +11,20 @@ MY_CONFIG_DIR=~/.myconfig
 MY_BIN_DIR=$MY_CONFIG_DIR/bin
 NVIM_CONFIG_DIR=~/.config/nvim
 
+# Terminal files
 GIT_COMPLETE_PATH=$MY_BIN_DIR/.git-completion.bash
 GIT_COMPLETE_PATH_ZSH=$MY_BIN_DIR/.git-completion.zsh
 GIT_PROMPT_PATH=$MY_BIN_DIR/.git-prompt.sh
+
+# Dot files
 NVIM_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/init.vim
 NVIM_CONFIG_PATH=~/.config/nvim/init.vim
 TMUX_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.tmux.conf
 TMUX_CONFIG_PATH=~/.tmux.conf
+GLOBAL_GITCONFIG_PATH=~/.gitconfig
+GLOBAL_GITCONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.gitconfig
+
+# Script constants
 FALSE=225
 
 
@@ -62,6 +69,7 @@ main() {
   # Compare dotfiles to see if any changes are made and replace them if there are changes
   create_replace_dotfile $NVIM_CONFIG_PATH $NVIM_CONFIG_ORIGIN_PATH
   create_replace_dotfile $TMUX_CONFIG_PATH $TMUX_CONFIG_ORIGIN_PATH
+  create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
 }
 
 create_directories() {

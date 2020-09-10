@@ -42,6 +42,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neomake/neomake'
 Plug 'kassio/neoterm'
+" Version control
+Plug 'tpope/vim-fugitive'
+" Powerline
+Plug 'Lokaltog/vim-powerline'
+" Tab bar
+Plug 'pacha/vem-tabline'
 " cSpell:enable
 call plug#end()
 
@@ -58,7 +64,9 @@ set tabstop=2
 colorscheme codedark
 set clipboard^=unnamed,unnamedplus
 set expandtab
-
+" open new split panes to right and below
+set splitright
+set splitbelow
 " Give more space for displaying messages.
 set cmdheight=2
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -75,6 +83,49 @@ else
   set signcolumn=yes
 endif
 
+"
+" Custom keybindings
+"
+" Close tab
+nnoremap <leader>c :tabc
+nnoremap <leader>o :tabo
+" Save
+nnoremap <C-s> :w<CR>
+" Quit
+nnoremap <C-q> :q<CR> 
+" use alt+hjkl to move between split/vsplit panels
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Tab navigation
+nnoremap <leader>1 :1tabnext<CR>
+nnoremap <leader>2 :2tabnext<CR>
+nnoremap <leader>3 :3tabnext<CR>
+nnoremap <leader>4 :4tabnext<CR>
+nnoremap <leader>5 :5tabnext<CR>
+nnoremap <leader>6 :6tabnext<CR>
+nnoremap <leader>7 :7tabnext<CR>
+nnoremap <leader>8 :8tabnext<CR>
+nnoremap <leader>9 :9tabnext<CR>
+
+"
+" Fugitive (git)
+"
+nnoremap <leader>gg :G<CR>
+" Select LHS change in conflict diff
+nnoremap <leader>gl :diffget //3<CR>
+" Select RHS change in conflict diff
+nnoremap <leader>gr :diffget //2<CR>
+
+"
+" Powerline
+"
+let g:Powerline_symbols = 'fancy'
 
 "
 " Nerdtree Config
@@ -92,28 +143,12 @@ nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 "
 " Terminal Config
 "
-" open new split panes to right and below
-set splitright
-set splitbelow
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-" open terminal on ctrl+n
-function! OpenTerminal()
-  split term
-  resize 10
-endfunction
-nnoremap <c-n> :call OpenTerminal()<CR>
-" use alt+hjkl to move between split/vsplit panels
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <c-n> :split terminal<CR>
+nnoremap <c-t> :tab terminal<CR>
 
 "
 " Search Config
@@ -159,11 +194,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -249,11 +280,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

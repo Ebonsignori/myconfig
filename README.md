@@ -11,16 +11,17 @@ Initialization script that should be sourced within .bashrc / .bash_profile, e.g
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
     - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
+       - You may need to run `gem install colorls --user-install`
 - [npm](https://nodejs.org/en/download/)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`
   - `npm install -g spaceship-prompt`
 - [nvm](https://github.com/nvm-sh/nvm)
   - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
-- [python2]
+- [python2](https://www.python.org/download/releases/2.0/)
   - Then run `python2 -m pip install --user --upgrade pynvim`
-- [python3]
+- [python3](https://www.python.org/downloads/)
   - Then run `python3 -m pip install --user --upgrade pynvim`
-- [pip3]
+- pip3 (should come with python3)
   - Then run `pip3 install neovim-remote`
 

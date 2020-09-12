@@ -97,6 +97,22 @@ endif
 "
 " Custom keybindings
 "
+" Go down and up page with <shift>j,k
+function! ScrollQuarter(move)
+    let height=winheight(0)
+
+    if a:move == 'up'
+        let key="\<C-Y>"
+    else
+        let key="\<C-E>"
+    endif
+    
+    " Nav 1/4th (25%) of page 
+    execute 'normal! ' . height/4 . key
+endfunction
+nnoremap <silent> J :call ScrollQuarter('up')<CR>
+nnoremap <silent> K :call ScrollQuarter('down')<CR>
+
 " Reload nvim config
 nnoremap <M-r> :so $MYVIMRC<CR>
 " Close tab
@@ -197,13 +213,15 @@ nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap ,b :Buffers<CR>
 nnoremap ,f :Ag<CR>
+command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Prevent fzf bug when pressing esc in window
 if has("nvim")
@@ -274,7 +292,7 @@ function! s:show_documentation()
 endfunction
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <M-d> :call <SID>show_documentation()<CR>
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')

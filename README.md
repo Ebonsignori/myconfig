@@ -1,6 +1,18 @@
 # myconfig
 
-Initialization script that should be sourced within .bashrc / .bash_profile, e.g. `source ~/.myconfig/init/init.sh`
+The desired workflow of this project is to edit configurations in [dotfiles](./dotfiles) here in this project and to copy and replace local configurations with the changes made here. This way this project serves as myconfig's source of truth. The expections to this are directories/files that are manually backed up. See [Manual Backup](#manual-backup/restore).
+
+For automatic replacement after update, we need to export a variable pointing to where this repo is cloned to and run the [init.sh](./init.sh) script.
+
+We do this by adding the following lines to the end of your `~/.zshrc` or `~/.bashrc` **after** installing the [Prereqs](#prereqs) below.
+
+```
+# Load myconfig profile *NOTE:* Place at bottom of .zshrc
+export MY_CONFIG_PROJECT_DIR=~/Projects/myconfig
+source $MY_CONFIG_PROJECT_DIR/init.sh
+```
+
+Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.myconfig/init/init.sh`
 
 ## Prereqs
 

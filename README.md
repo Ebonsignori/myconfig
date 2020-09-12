@@ -24,5 +24,6 @@ Initialization script that should be sourced within .bashrc / .bash_profile, e.g
   - Then run `python3 -m pip install --user --upgrade pynvim`
 - pip3 (should come with python3)
   - Then run `pip3 install neovim-remote`
-- Install powerline font for your terminal. Follow instructions for Linux or Mac.
-  - For Mac default term install [this](https://github.com/powerline/fonts/archive/master.zip) and run `install.sh`  
+- Install a [nerd-font](https://github.com/ryanoasis/nerd-font) font for your terminal. Follow instructions for Linux or Mac.
+  - Try to install using a package manger (e.g. Brew)
+  - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  

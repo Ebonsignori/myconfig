@@ -110,8 +110,8 @@ function! ScrollQuarter(move)
     " Nav 1/4th (25%) of page 
     execute 'normal! ' . height/4 . key
 endfunction
-nnoremap <silent> J :call ScrollQuarter('up')<CR>
-nnoremap <silent> K :call ScrollQuarter('down')<CR>
+nnoremap <silent> K :call ScrollQuarter('up')<CR>
+nnoremap <silent> J :call ScrollQuarter('down')<CR>
 
 " Reload nvim config
 nnoremap <M-r> :so $MYVIMRC<CR>
@@ -152,6 +152,17 @@ nnoremap ,j :bn<CR>
 nnoremap ,c :bd<CR>
 " Close all other open buffers
 nnoremap ,o :%bdelete<bar>edit #<bar>normal `"<CR>
+
+" Reopen last closed window with <leader>u
+augroup bufclosetrack
+  au!
+  autocmd WinLeave * let g:lastWinName = @%
+augroup END
+function! LastWindow()
+  exe "split " . g:lastWinName
+endfunction
+command -nargs=0 LastWindow call LastWindow()
+nnoremap <leader>u :LastWindow<CR>
 
 "
 " Fugitive (git)

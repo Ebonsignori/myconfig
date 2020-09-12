@@ -27,7 +27,7 @@ main() {
 backup_directory() {
   num_args=$#
 	if [ $# -lt 2 ]; then
-		echo "Dotfile destination and origin path arguments required"
+		echo "Directory destination and origin path arguments required"
 		return $FALSE
 	fi
 

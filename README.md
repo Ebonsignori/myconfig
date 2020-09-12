@@ -27,3 +27,10 @@ Initialization script that should be sourced within .bashrc / .bash_profile, e.g
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-font) font for your terminal. Follow instructions for Linux or Mac.
   - Try to install using a package manger (e.g. Brew)
   - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  
+
+## Manual Backup / Restore
+
+Run `sh backup.sh` to backup the following directories to this repo. They must manually be restored
+
+- `./dotfiles/coc` to `~/.config/coc`. Only copy snippets folder and mru's. If copying entire folder will need to custom `npm i`. Installing via nvim `:PlugInstall` first and then copying over needed files is recommended
+

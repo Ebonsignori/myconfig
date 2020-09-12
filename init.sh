@@ -155,6 +155,29 @@ create_replace_dotfile() {
   fi
 }
 
+# $1 = project path of dir to restore 
+# $2 = local destination of dir
+restore_directory() {
+  num_args=$#
+	if [ $# -lt 2 ]; then
+		echo "Directory destination and origin path arguments required"
+		return $FALSE
+	fi
+
+  if [ ! -d $1 ]; then
+    echo "Restore for directory '$1' failed. Directory DNE"
+    return $FALSE
+  fi
+
+  if [ ! -d $2 ]; then
+    echo "Invalid local directory: '$2'"
+    exit 1
+  fi
+
+  cp -r $1 $2
+  echo "Retored up '$1' to '$2'"
+}
+
 # Source this to act as a sort of .bash_profile for zsh in this project
 if [ -n "$ZSH_VERSION" ]; then
   source $MY_CONFIG_PROJECT_DIR/zsh_profile

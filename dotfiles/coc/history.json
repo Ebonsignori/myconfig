@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "%2FUsers%2Fevanbonsignori%2F": {
+      "config%2Fnvim": [
+        "jkk"
+      ]
+    }
+  },
+  "diagnostics": {
+    "%2FUsers%2Fevanbonsignori%2FProjects%2Fmyconfig": [
+      " "
+    ],
+    "%2FUsers%2Fevanbonsignori%2FProjects": [
+      " "
+    ]
+  }
+}

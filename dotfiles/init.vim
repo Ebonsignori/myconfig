@@ -48,6 +48,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-powerline'
 " Tab bar
 Plug 'pacha/vem-tabline'
+" Icons
+Plug 'ryanoasis/vim-devicons'
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
+" Session management
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 " cSpell:enable
 call plug#end()
 
@@ -56,7 +63,10 @@ call plug#end()
 "Config Section
 "
 "
-set number
+" Use hybrid line numbers
+:set number 
+" Syntax highlighting
+set encoding=utf-8
 syntax enable
 set hidden
 set shiftwidth=2
@@ -64,6 +74,7 @@ set tabstop=2
 colorscheme codedark
 set clipboard^=unnamed,unnamedplus
 set expandtab
+set laststatus=2
 " open new split panes to right and below
 set splitright
 set splitbelow
@@ -86,9 +97,11 @@ endif
 "
 " Custom keybindings
 "
+" Reload nvim config
+nnoremap <M-r> :so $MYVIMRC<CR>
 " Close tab
-nnoremap <leader>c :tabc
-nnoremap <leader>o :tabo
+nnoremap <leader>c :tabc<CR>
+nnoremap <leader>o :tabo<CR>
 " Save
 nnoremap <C-s> :w<CR>
 " Quit
@@ -102,16 +115,27 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" Tab navigation
-nnoremap <leader>1 :1tabnext<CR>
-nnoremap <leader>2 :2tabnext<CR>
-nnoremap <leader>3 :3tabnext<CR>
-nnoremap <leader>4 :4tabnext<CR>
-nnoremap <leader>5 :5tabnext<CR>
-nnoremap <leader>6 :6tabnext<CR>
-nnoremap <leader>7 :7tabnext<CR>
-nnoremap <leader>8 :8tabnext<CR>
-nnoremap <leader>9 :9tabnext<CR>
+
+" Buffer navigation
+nnoremap <leader>1 :buffer 1<CR>
+nnoremap <leader>2 :buffer 2<CR>
+nnoremap <leader>3 :buffer 3<CR>
+nnoremap <leader>4 :buffer 4<CR>
+nnoremap <leader>5 :buffer 5<CR>
+nnoremap <leader>6 :buffer 6<CR>
+nnoremap <leader>7 :buffer 7<CR>
+nnoremap <leader>8 :buffer 8<CR>
+nnoremap <leader>9 :buffer 9<CR>
+
+" Open new buffer with entered file
+nnoremap <Leader>b :e 
+" Nav to prev/next buffer
+nnoremap ,k :bp<CR>
+nnoremap ,j :bn<CR>
+" Close current buffer
+nnoremap ,c :bd<CR>
+" Close all other open buffers
+nnoremap ,o :%bdelete<bar>edit #<bar>normal `"<CR>
 
 "
 " Fugitive (git)
@@ -123,21 +147,37 @@ nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gr :diffget //2<CR>
 
 "
+" Sessions
+"
+" Sessions are unique to branch
+let g:prosession_per_branch=1
+let g:prosession_on_startup = 1
+nnoremap <leader>s :echo prosession#ListSessions()<CR>
+nnoremap <leader><C-s> :Prosession
+
+"
 " Powerline
 "
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_theme = 'solarized256'
+let g:Powerline_colorscheme = 'solarized256'
+" Insert the charcode segment after the filetype segment
+" call Pl#Theme#ReplaceSegment('scrollpercent', 'fileinfo')
 
 "
 " Nerdtree Config
 "
+" Don't load built-in browser, netrw
+let loaded_netrwPlugin = 1
+let g:NERDTreeQuitOnOpen = 0
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-" Automatically close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+" Fix to allow OnTabEnter to work
+let g:NERDTreeHijackNetrw = 0
 
 
 "
@@ -147,19 +187,29 @@ nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 tnoremap <Esc> <C-\><C-n>
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-nnoremap <c-n> :split terminal<CR>
-nnoremap <c-t> :tab terminal<CR>
+nnoremap <leader><M-t> :terminal<CR>
+nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
+
 
 "
 " Search Config
 "
 nnoremap <C-p> :FZF<CR>
+nnoremap ,b :Buffers<CR>
+nnoremap ,f :Ag<CR>
+
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Prevent fzf bug when pressing esc in window
+if has("nvim")
+  au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au FileType fzf tunmap <buffer> <Esc>
+endif
 
 "
 " NERDCommenter config
@@ -293,7 +343,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{ObsessionStatus()}
 
 " Mappings for CoCList
 " Show all diagnostics.

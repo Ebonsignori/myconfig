@@ -15,6 +15,8 @@ NVIM_CONFIG_DIR=~/.config/nvim
 GIT_COMPLETE_PATH=$MY_BIN_DIR/.git-completion.bash
 GIT_COMPLETE_PATH_ZSH=$MY_BIN_DIR/.git-completion.zsh
 GIT_PROMPT_PATH=$MY_BIN_DIR/.git-prompt.sh
+ZSH_AUTOCOMPLETE_PATH=$MY_BIN_DIR/zsh-autocomplete
+ZSH_AUTOCOMPLETE_FILE=$ZSH_AUTOCOMPLETE_PATH/zsh-autocomplete.plugin.zsh
 
 # Dot files
 NVIM_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/init.vim
@@ -23,6 +25,7 @@ TMUX_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.tmux.conf
 TMUX_CONFIG_PATH=~/.tmux.conf
 GLOBAL_GITCONFIG_PATH=~/.gitconfig
 GLOBAL_GITCONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.gitconfig
+ZSH_PROFILE_PROJECT_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/zsh_profile
 
 # Script constants
 FALSE=225
@@ -39,20 +42,23 @@ main() {
 		curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $GIT_COMPLETE_PATH 
 	fi
 	if [[ ! -f $GIT_COMPLETE_PATH_ZSH && -n $ZSH_VERSION ]]; then
-    echo 'Downloading .git-completion.bash'
+    echo 'Downloading .git-completion.zsh'
 		curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh -o $GIT_COMPLETE_PATH_ZSH 
 	fi
-
 	if [ ! -f $GIT_PROMPT_PATH ]; then
     echo 'Downloading git-prompt.sh'
 		curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o $GIT_PROMPT_PATH 
+  fi
+  if [ ! -d $ZSH_AUTOCOMPLETE_PATH ]; then
+    echo 'Downloading zsh autocomplete plugin'
+    git clone https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_AUTOCOMPLETE_PATH
 	fi
 
   # Load git bash/zsh completion
   case $SHELL in
-  */zsh) 
+  */zsh)
      # assume Zsh
-    zstyle ':completion:*:*:git:*' script $GIT_COMPLETE_PATH 
+    zstyle ':completion:*:*:git:*' script $GIT_COMPLETE_PATH
     fpath=($MY_BIN_DIR $fpath)
     autoload -Uz compinit && compinit
      ;;
@@ -64,12 +70,24 @@ main() {
      # assume something else
   esac
 
-	source $MY_BIN_DIR/.git-prompt.sh
-
   # Compare dotfiles to see if any changes are made and replace them if there are changes
   create_replace_dotfile $NVIM_CONFIG_PATH $NVIM_CONFIG_ORIGIN_PATH
   create_replace_dotfile $TMUX_CONFIG_PATH $TMUX_CONFIG_ORIGIN_PATH
   create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
+
+  # Source plugins
+  source $GIT_PROMPT_PATH
+  if [ -n "$ZSH_VERSION" ]; then
+    # Source this to act as a sort of .bash_profile for zsh in this project
+    source $ZSH_PROFILE_PROJECT_PATH
+    source $ZSH_AUTOCOMPLETE_FILE
+  fi
+
+  # Export vars to be picked up in shell when this is sourced
+  export MY_CONFIG_DIR=$MY_CONFIG_DIR
+  export MY_BIN_DIR=$MY_BIN_DIR
+
+  echo 'Initalized .myconifg'
 }
 
 create_directories() {
@@ -87,6 +105,13 @@ create_directories() {
 		 exit $crate_dir_status 
 	fi
 
+	create_directory $NVIM_CONFIG_DIR
+	create_dir_status=$?
+	if ! $(exit $create_dir_status); then
+	   echo "Failed to create '$NVIM_CONFIG_DIR'"
+		 exit $crate_dir_status 
+	fi
+  
 	create_directory $NVIM_CONFIG_DIR
 	create_dir_status=$?
 	if ! $(exit $create_dir_status); then
@@ -178,15 +203,5 @@ restore_directory() {
   echo "Retored up '$1' to '$2'"
 }
 
-# Source this to act as a sort of .bash_profile for zsh in this project
-if [ -n "$ZSH_VERSION" ]; then
-  source $MY_CONFIG_PROJECT_DIR/zsh_profile
-fi
-
-# Export vars to be picked up in shell when this is sourced
-export MY_CONFIG_DIR=$MY_CONFIG_DIR
-export MY_BIN_DIR=$MY_BIN_DIR
-
-echo 'Initalized .myconifg'
 
 main "$@";

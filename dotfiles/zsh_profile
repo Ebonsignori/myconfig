@@ -47,4 +47,3 @@ load-nvmrc
 
 # Make FZF open with last search (useful for vim)
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
-

@@ -1,6 +1,6 @@
 # myconfig
 
-The desired workflow of this project is to edit configurations in [dotfiles](./dotfiles) here in this project and to copy and replace local configurations with the changes made here. This way this project serves as myconfig's source of truth. The expections to this are directories/files that are manually backed up. See [Manual Backup](#manual-backup/restore).
+The desired workflow of this project is to make changes to configurations in [dotfiles](./dotfiles) in this project and to copy and replace local configurations with the changes. This way this project serves as myconfig's source of truth. The expections to this are directories/files that are manually backed up. See [Manual Backup](#manual-backup/restore).
 
 For automatic replacement after update, we need to export a variable pointing to where this repo is cloned to and run the [init.sh](./init.sh) script.
 
@@ -17,13 +17,13 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
 ## Prereqs
 
 - [git](https://git-scm.com/)
-- [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+- [zsh shell](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
   - Then run:
     - `cd /usr/local/share/zsh`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
-    - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
-       - You may need to run `gem install colorls --user-install`
+  - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
+     - You may need to run `gem install colorls --user-install`
 - [npm](https://nodejs.org/en/download/)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`

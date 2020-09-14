@@ -55,6 +55,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 " Session management
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
+" Tab rename
+Plug 'gcmt/taboo.vim' 
 " cSpell:enable
 call plug#end()
 
@@ -161,8 +163,8 @@ augroup END
 function! LastWindow()
   exe "split " . g:lastWinName
 endfunction
-command -nargs=0 LastWindow call LastWindow()
-nnoremap <leader>u :LastWindow<CR>
+command -nargs=0 CallLastWindow call LastWindow()
+nnoremap <leader>u :CallLastWindow<CR>
 
 "
 " Fugitive (git)

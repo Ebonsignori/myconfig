@@ -118,6 +118,14 @@ create_directories() {
 	   echo "Failed to create '$NVIM_CONFIG_DIR'"
 		 exit $crate_dir_status 
 	fi
+  
+  create_directory $MY_CONFIG_DIR/.vim_undo_history
+	create_dir_status=$?
+	if ! $(exit $create_dir_status); then
+	   echo "Failed to create '$MY_CONFIG_DIR/.vim_undo_history'"
+		 exit $crate_dir_status 
+	fi
+
 }
 
 check_prereqs() {

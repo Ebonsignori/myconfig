@@ -44,8 +44,9 @@ Plug 'neomake/neomake'
 Plug 'kassio/neoterm'
 " Version control
 Plug 'tpope/vim-fugitive'
-" Powerline
-Plug 'Lokaltog/vim-powerline'
+Plug 'airblade/vim-gitgutter'
+" Status bar
+Plug 'vim-airline/vim-airline'
 " Tab bar
 Plug 'pacha/vem-tabline'
 " Icons
@@ -57,6 +58,10 @@ Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 " Tab rename
 Plug 'gcmt/taboo.vim' 
+" Undo History Browser
+Plug 'mbbill/undotree'
+" Copy/Yank history keeper
+Plug 'maxbrunsfeld/vim-yankstack'
 " cSpell:enable
 call plug#end()
 
@@ -95,6 +100,8 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+" Hack to make undo only undo one word at a time
+inoremap <Space> <Space><C-g>u
 
 "
 " Custom keybindings
@@ -145,6 +152,18 @@ nnoremap <leader>7 :buffer 7<CR>
 nnoremap <leader>8 :buffer 8<CR>
 nnoremap <leader>9 :buffer 9<CR>
 
+" Move lines up / down 
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <Esc>:m .+1<CR>==gi
+inoremap <M-k> <Esc>:m .-2<CR>==gi
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
+
+" Add newlines above/below w/o entering insert mode
+nmap oo o<Esc>k
+nmap OO O<Esc>j
+
 " Open new buffer with entered file
 nnoremap <Leader>b :e 
 " Nav to prev/next buffer
@@ -163,17 +182,25 @@ augroup END
 function! LastWindow()
   exe "split " . g:lastWinName
 endfunction
-command -nargs=0 CallLastWindow call LastWindow()
+command! -nargs=0 CallLastWindow call LastWindow()
 nnoremap <leader>u :CallLastWindow<CR>
 
 "
 " Fugitive (git)
 "
-nnoremap <leader>gg :G<CR>
+nnoremap <leader>gg <CR>
 " Select LHS change in conflict diff
 nnoremap <leader>gl :diffget //3<CR>
 " Select RHS change in conflict diff
 nnoremap <leader>gr :diffget //2<CR>
+" Revert change in diff view
+nnoremap <leader>grr :diffput
+
+"
+" Vim-GitGutter
+"
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 "
 " Sessions
@@ -184,12 +211,15 @@ let g:prosession_on_startup = 1
 nnoremap <leader>s :echo prosession#ListSessions()<CR>
 nnoremap <leader><C-s> :Prosession
 
+" Yankstack
+nnoremap <leader>p :Yanks<CR>
+
 "
-" Powerline
+" (DEPRECATED: for airline) Powerline
 "
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme = 'solarized256'
-let g:Powerline_colorscheme = 'solarized256'
+" let g:Powerline_symbols = 'fancy'
+" let g:Powerline_theme = 'solarized256'
+" let g:Powerline_colorscheme = 'solarized256'
 " Insert the charcode segment after the filetype segment
 " call Pl#Theme#ReplaceSegment('scrollpercent', 'fileinfo')
 
@@ -374,7 +404,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{ObsessionStatus()}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{ObsessionStatus()}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -393,6 +423,15 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+"
+" Undotree config
+"
+nnoremap <F5> :UndotreeToggle<cr>
+if has("persistent_undo")
+    set undodir=$MY_CONFIG_DIR/vim_undo_history
+    set undofile
+endif
 
 "
 " Scripts

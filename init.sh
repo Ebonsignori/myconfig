@@ -180,11 +180,21 @@ create_replace_dotfile() {
 
   if [ ! -f $1 ]; then
     echo "Creating dotfile '$1'"
-    cp -i $2 $1 
+    if [ -n $MY_CONFIG_AUTO_OVERWRITE ]; then
+      echo "Auto overwriting '$1' with changes."
+      cp $2 $1 
+    else
+      cp -i $2 $1 
+    fi
   # Dotfile exists, but changes have been made so it needs to be replaced
   elif [[ -f $1 && $cmpare_status -ne 0 ]]; then
     echo "Updates for '$1' detected"
-    cp -i $2 $1
+    if [ -n $MY_CONFIG_AUTO_OVERWRITE ]; then
+      echo "Auto overwriting '$1' with changes."
+      cp $2 $1 
+    else
+      cp -i $2 $1 
+    fi
   fi
 }
 

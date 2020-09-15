@@ -40,6 +40,12 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - Try to install using a package manger (e.g. Brew)
   - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  
 
+## OS-Specific Steps
+
+### Mac OS
+
+- In xTerminal, go to preferences -> keyboard and check `Use Option as Meta Key`
+
 ## Manual Backup / Restore
 
 Run `sh backup.sh` to backup the following directories to this repo. They must manually be restored

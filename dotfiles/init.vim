@@ -24,8 +24,9 @@ call plug#begin('~/.vim/plugged')
 "
 "
 " Theme
+Plug 'joshdick/onedark.vim'
 " cSpell:disable
-Plug 'tomasiser/vim-code-dark'
+" Plug 'tomasiser/vim-code-dark'
 " File Explorer
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
@@ -48,7 +49,7 @@ Plug 'airblade/vim-gitgutter'
 " Status bar
 Plug 'vim-airline/vim-airline'
 " Tab bar
-Plug 'pacha/vem-tabline'
+" Plug 'pacha/vem-tabline'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 " Markdown preview
@@ -62,6 +63,8 @@ Plug 'gcmt/taboo.vim'
 Plug 'mbbill/undotree'
 " Copy/Yank history keeper
 Plug 'maxbrunsfeld/vim-yankstack'
+" Window manager
+Plug 'paroxayte/vwm.vim'
 " cSpell:enable
 call plug#end()
 
@@ -70,15 +73,16 @@ call plug#end()
 "Config Section
 "
 "
+" Set autosave
+set autowriteall
 " Use hybrid line numbers
-:set number 
+set number 
 " Syntax highlighting
 set encoding=utf-8
 syntax enable
 set hidden
 set shiftwidth=2
 set tabstop=2
-colorscheme codedark
 set clipboard^=unnamed,unnamedplus
 set expandtab
 set laststatus=2
@@ -102,25 +106,35 @@ else
 endif
 " Hack to make undo only undo one word at a time
 inoremap <Space> <Space><C-g>u
+" Mouse
+set mouse=n
 
 "
 " Custom keybindings
 "
 " Go down and up page with <shift>j,k
-function! ScrollQuarter(move)
-    let height=winheight(0)
+" DEPRECATED: Scrolls page and not cursor / to jumpy
+" function! ScrollQuarter(move)
+    " let height=winheight(0)
 
-    if a:move == 'up'
-        let key="\<C-Y>"
-    else
-        let key="\<C-E>"
-    endif
-    
-    " Nav 1/4th (25%) of page 
-    execute 'normal! ' . height/4 . key
-endfunction
-nnoremap <silent> K :call ScrollQuarter('up')<CR>
-nnoremap <silent> J :call ScrollQuarter('down')<CR>
+    " if a:move == 'up'
+        " let key="\<C-Y>"
+    " else
+        " let key="\<C-E>"
+    " endif
+
+    " " Nav 1/4th (25%) of page
+    " execute 'normal! ' . height/4 . key
+" endfunction
+" nnoremap <silent> K :call ScrollQuarter('up')<CR>
+" nnoremap <silent> J :call ScrollQuarter('down')<CR>
+nnoremap <silent> K <C-u> 
+nnoremap <silent> J <C-d> 
+" Indent w tab/shift tab
+nnoremap <M-Tab> :execute "normal! >>_"<CR>
+nnoremap <M-S-Tab> :execute "normal! <<_"<CR>
+vnoremap <M-Tab> :execute "normal! >gv"<CR>
+vnoremap <M-S-Tab> :execute "normal! <gv"<CR>
 
 " Reload nvim config
 nnoremap <M-r> :so $MYVIMRC<CR>
@@ -141,16 +155,28 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
 " Buffer navigation
-nnoremap <leader>1 :buffer 1<CR>
-nnoremap <leader>2 :buffer 2<CR>
-nnoremap <leader>3 :buffer 3<CR>
-nnoremap <leader>4 :buffer 4<CR>
-nnoremap <leader>5 :buffer 5<CR>
-nnoremap <leader>6 :buffer 6<CR>
-nnoremap <leader>7 :buffer 7<CR>
-nnoremap <leader>8 :buffer 8<CR>
-nnoremap <leader>9 :buffer 9<CR>
+" nnoremap <leader>1 :buffer 1<CR>
+" nnoremap <leader>2 :buffer 2<CR>
+" nnoremap <leader>3 :buffer 3<CR>
+" nnoremap <leader>4 :buffer 4<CR>
+" nnoremap <leader>5 :buffer 5<CR>
+" nnoremap <leader>6 :buffer 6<CR>
+" nnoremap <leader>7 :buffer 7<CR>
+" nnoremap <leader>8 :buffer 8<CR>
+" nnoremap <leader>9 :buffer 9<CR>
 
 " Move lines up / down 
 nnoremap <M-j> :m .+1<CR>==
@@ -161,8 +187,8 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 " Add newlines above/below w/o entering insert mode
-nmap oo o<Esc>k
-nmap OO O<Esc>j
+nmap <M-o> o<Esc>k
+nmap <M-O> O<Esc>j
 
 " Open new buffer with entered file
 nnoremap <Leader>b :e 
@@ -185,10 +211,32 @@ endfunction
 command! -nargs=0 CallLastWindow call LastWindow()
 nnoremap <leader>u :CallLastWindow<CR>
 
+" Theme Opts
+"
+"
+" codedark.vim
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let g:airline_theme = 'codedark'
+" set t_Co=256
+" set t_ut=
+" colorscheme codedark
+" g:onedark_termcolors=256
+colorscheme onedark
+let g:airline_theme='onedark'
+
+function! s:echo1() abort
+  echo 'Hello world'
+endfunction
+
+function! EchoDelay1() abort
+  call timer_start(1000, function('s:echo1'))
+endfunction
+
 "
 " Fugitive (git)
 "
-nnoremap <leader>gg <CR>
+nnoremap <leader>gg :G<CR> <bar> <C-W>T 
+nnoremap ,gg <Esc> <Bar> :G<CR> <Bar> :resize 15
 " Select LHS change in conflict diff
 nnoremap <leader>gl :diffget //3<CR>
 " Select RHS change in conflict diff
@@ -224,6 +272,40 @@ nnoremap <leader>p :Yanks<CR>
 " call Pl#Theme#ReplaceSegment('scrollpercent', 'fileinfo')
 
 "
+" Tabline config
+"
+" hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
+" hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
+function! Tabline()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
+
+    let s .= '%' . tab . 'T'
+    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= ' ' . tab .':'
+    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
+
+    if bufmodified
+      let s .= '[+] '
+    endif
+  endfor
+
+  let s .= '%#TabLineFill#'
+  if (exists("g:tablineclosebutton"))
+    let s .= '%=%999XX'
+  endif
+  return s
+endfunction
+set tabline=%!Tabline()
+
+"
 " Nerdtree Config
 "
 " Don't load built-in browser, netrw
@@ -245,7 +327,7 @@ let g:NERDTreeHijackNetrw = 0
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
 " start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+autocmd BufWinEnter,WinEnter term://* startinsert
 nnoremap <leader><M-t> :terminal<CR>
 nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
 

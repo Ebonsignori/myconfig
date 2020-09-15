@@ -65,6 +65,12 @@ Plug 'mbbill/undotree'
 Plug 'maxbrunsfeld/vim-yankstack'
 " Window manager
 Plug 'paroxayte/vwm.vim'
+" Autosave
+Plug '907th/vim-auto-save'
+" Colorize hex
+Plug 'chrisbra/Colorizer'
+" Rainbow parens
+Plug 'luochen1990/rainbow'
 " cSpell:enable
 call plug#end()
 
@@ -73,8 +79,6 @@ call plug#end()
 "Config Section
 "
 "
-" Set autosave
-set autowriteall
 " Use hybrid line numbers
 set number 
 " Syntax highlighting
@@ -166,6 +170,16 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+tnoremap <leader>1 1<C-h> <C-\><C-n>1gt
+tnoremap <leader>2 2<C-h> <C-\><C-n>2gt
+tnoremap <leader>3 3<C-h> <C-\><C-n>3gt
+tnoremap <leader>4 4<C-h> <C-\><C-n>4gt
+tnoremap <leader>5 5<C-h> <C-\><C-n>5gt
+tnoremap <leader>6 6<C-h> <C-\><C-n>6gt
+tnoremap <leader>7 7<C-h> <C-\><C-n>7gt
+tnoremap <leader>8 8<C-h> <C-\><C-n>8gt
+tnoremap <leader>9 9<C-h> <C-\><C-n>9gt
+tnoremap <leader>0 :<C-h> <C-\><C-n>:tablast<CR>
 
 " Buffer navigation
 " nnoremap <leader>1 :buffer 1<CR>
@@ -211,6 +225,21 @@ endfunction
 command! -nargs=0 CallLastWindow call LastWindow()
 nnoremap <leader>u :CallLastWindow<CR>
 
+" Custom resize shortcuts
+nnoremap <C-w><M-1> :resize 15<CR>
+nnoremap <C-w><M-2> :resize 25<CR>
+nnoremap <C-w><M-3> :resize 50<CR>
+
+" Increment / decrement 
+" Force decimal-based arithmetic
+set nrformats=
+nnoremap + <C-a>
+nnoremap - <C-x>
+" For visual sequence inc/dec
+xnoremap + g<C-a>
+xnoremap - g<C-x>
+
+"
 " Theme Opts
 "
 "
@@ -232,18 +261,23 @@ function! EchoDelay1() abort
   call timer_start(1000, function('s:echo1'))
 endfunction
 
+" Rainbow parens plugin
+let g:rainbow_active = 1
+
 "
 " Fugitive (git)
 "
 nnoremap <leader>gg :G<CR> <bar> <C-W>T 
-nnoremap ,gg <Esc> <Bar> :G<CR> <Bar> :resize 15
+nnoremap ,gg <Esc> <Bar> :G<CR> <Bar> :resize 15<CR>
 " Select LHS change in conflict diff
 nnoremap <leader>gl :diffget //3<CR>
 " Select RHS change in conflict diff
 nnoremap <leader>gr :diffget //2<CR>
 " Revert change in diff view
 nnoremap <leader>grr :diffput
-
+" Change color of git diff
+highlight DiffChange ctermfg=Black ctermbg=59 guifg=#e5c07b guibg=#e5da7b
+highlight DiffText ctermfg=Black ctermbg=149 guifg=#e5c07b guibg=#e5da7b
 "
 " Vim-GitGutter
 "
@@ -259,7 +293,18 @@ let g:prosession_on_startup = 1
 nnoremap <leader>s :echo prosession#ListSessions()<CR>
 nnoremap <leader><C-s> :Prosession
 
+"
+" Autosave plugin config
+"
+let g:auto_save        = 1
+let g:auto_save_silent = 1
+let g:auto_save_events = ["InsertLeave", "TextChanged", "FocusLost"]
+" Set vim setting for autosave too
+set autowriteall
+
+"
 " Yankstack
+"
 nnoremap <leader>p :Yanks<CR>
 
 "
@@ -274,9 +319,9 @@ nnoremap <leader>p :Yanks<CR>
 "
 " Tabline config
 "
-" hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
-" hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
-hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
+hi TabLine ctermfg=250 ctermbg=238 cterm=NONE
+" hi TabLineFill  ctermfg=lightgrey  ctermbg=darkgrey cterm=NONE
+hi TabLineSel ctermfg=Black  ctermbg=Green  cterm=NONE
 function! Tabline()
   let s = ''
   for i in range(tabpagenr('$'))

@@ -81,6 +81,12 @@ call plug#end()
 "
 " Use hybrid line numbers
 set number 
+" Highlight cursor line
+set cursorline
+set cursorcolumn
+" Cursor color
+autocmd InsertEnter * highlight Cursor ctermfg=White ctermBg=Black 
+autocmd InsertLeave * highlight Cursor ctermfg=White ctermBg=Black
 " Syntax highlighting
 set encoding=utf-8
 syntax enable
@@ -179,7 +185,7 @@ tnoremap <leader>6 6<C-h> <C-\><C-n>6gt
 tnoremap <leader>7 7<C-h> <C-\><C-n>7gt
 tnoremap <leader>8 8<C-h> <C-\><C-n>8gt
 tnoremap <leader>9 9<C-h> <C-\><C-n>9gt
-tnoremap <leader>0 :<C-h> <C-\><C-n>:tablast<CR>
+tnoremap <leader>0 <C-h> <C-\><C-n>:tablast<CR>
 
 " Buffer navigation
 " nnoremap <leader>1 :buffer 1<CR>
@@ -264,7 +270,9 @@ endfunction
 " Rainbow parens plugin
 let g:rainbow_active = 1
 
-"
+" Colorizer plugin (hex codes)
+let g:colorizer_auto_color = 0
+
 " Fugitive (git)
 "
 nnoremap <leader>gg :G<CR> <bar> <C-W>T 
@@ -276,8 +284,9 @@ nnoremap <leader>gr :diffget //2<CR>
 " Revert change in diff view
 nnoremap <leader>grr :diffput
 " Change color of git diff
-highlight DiffChange ctermfg=Black ctermbg=59 guifg=#e5c07b guibg=#e5da7b
-highlight DiffText ctermfg=Black ctermbg=149 guifg=#e5c07b guibg=#e5da7b
+highlight DiffChange ctermfg=145 ctermbg=235
+highlight DiffText ctermfg=Black ctermbg=114
+
 "
 " Vim-GitGutter
 "
@@ -319,9 +328,15 @@ nnoremap <leader>p :Yanks<CR>
 "
 " Tabline config
 "
-hi TabLine ctermfg=250 ctermbg=238 cterm=NONE
+" Uncomment to test theme colors
+" let theme_colors = onedark#GetColors()
+" let test_var = theme_colors.black.cterm
+" echo "color: " . test_var
+" Colors: 114 = green, 236 = light grey, 145 = light white, 235 = term bg / black
+hi TabLine ctermfg=145 ctermbg=236 cterm=NONE
 " hi TabLineFill  ctermfg=lightgrey  ctermbg=darkgrey cterm=NONE
-hi TabLineSel ctermfg=Black  ctermbg=Green  cterm=NONE
+hi TabLineSel ctermfg=Black  ctermbg=114  cterm=NONE cterm=bold
+
 function! Tabline()
   let s = ''
   for i in range(tabpagenr('$'))
@@ -349,6 +364,15 @@ function! Tabline()
   return s
 endfunction
 set tabline=%!Tabline()
+
+"
+" neovim-remote config
+"
+" We use nvr to open nvim inside an nvim terminal. e.g. git commit msg 
+if has('nvim')
+  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+  autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+endif
 
 "
 " Nerdtree Config

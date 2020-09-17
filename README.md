@@ -41,7 +41,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - Then run `python3 -m pip install --user --upgrade pynvim`
 - [pip3](https://www.educative.io/edpresso/installing-pip3-in-ubuntu)
   - Then run `pip3 install neovim-remote`
-- Install a [nerd-font](https://github.com/ryanoasis/nerd-font) font for your terminal. Follow instructions for Linux or Mac.
+- Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font for your terminal. Follow instructions for Linux or Mac.
   - Try to install using a package manger (e.g. Brew)
   - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  
 

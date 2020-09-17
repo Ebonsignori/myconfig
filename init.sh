@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # This script won't work unless this var is set
 if [ -z "$MY_CONFIG_PROJECT_DIR" ]; then
@@ -130,11 +130,11 @@ create_directories() {
 
 check_prereqs() {
   check_prereq "npm -v" "npm"
-  check_prereq "nvm --version" "nvm"
+  # check_prereq "nvm --version" "nvm"
   check_prereq "git --version" "git"
   check_prereq "nvim -v" "nvim"
-  check_prereq "tmux -V" "tmux"
-  check_prereq "pip3 -V" "pip3"
+  # check_prereq "tmux -V" "tmux"
+  # check_prereq "pip3 -V" "pip3"
 }
 
 check_prereq() {

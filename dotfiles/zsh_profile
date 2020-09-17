@@ -10,6 +10,18 @@ alias ll='colorls --group-directories-first --almost-all --long' # detailed list
 export EDITOR=/usr/local/bin/nvim
 export VISUAL=/usr/local/bin/nvim
 
+# for ZSH
+case "$OSTYPE" in
+  darwin*)
+    # MAC OS Specific settings
+  ;;
+  linux*)
+  # Alias pbcopy / pbpaste for linux
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
+  ;;
+esac
+
 # nvim alias to open new nvim tab, vert, or hortz split
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
   alias h='nvr -o'

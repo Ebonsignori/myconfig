@@ -23,20 +23,25 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
+     - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
      - You may need to run `gem install colorls --user-install`
-- [npm](https://nodejs.org/en/download/)
+- [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+- [nvm](https://github.com/nvm-sh/nvm)
+  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
+  - `nvm install <node version>
+- [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`
   - `npm install -g spaceship-prompt`
-- [nvm](https://github.com/nvm-sh/nvm)
-  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
 - [python2](https://www.python.org/download/releases/2.0/)
+  - Install [pip with python2](https://pip.pypa.io/en/stable/installing/)
   - Then run `python2 -m pip install --user --upgrade pynvim`
 - [python3](https://www.python.org/downloads/)
+  - Install [pip w python3](https://pip.pypa.io/en/stable/installing/)
   - Then run `python3 -m pip install --user --upgrade pynvim`
-- pip3 (should come with python3)
+- [pip3](https://www.educative.io/edpresso/installing-pip3-in-ubuntu)
   - Then run `pip3 install neovim-remote`
-- Install a [nerd-font](https://github.com/ryanoasis/nerd-font) font for your terminal. Follow instructions for Linux or Mac.
+- Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font for your terminal. Follow instructions for Linux or Mac.
   - Try to install using a package manger (e.g. Brew)
   - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  
 

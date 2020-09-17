@@ -12,6 +12,12 @@ export MY_CONFIG_PROJECT_DIR=~/Projects/myconfig
 source $MY_CONFIG_PROJECT_DIR/init.sh
 ```
 
+Optionally you can add the following to override config files without asking for confirmation
+
+```
+export MY_CONFIG_AUTO_OVERWRITE=true  
+```
+
 Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.myconfig/init/init.sh`
 
 ## Prereqs

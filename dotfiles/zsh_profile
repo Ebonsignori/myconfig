@@ -59,3 +59,10 @@ load-nvmrc
 
 # Make FZF open with last search (useful for vim)
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
+
+# Only load zsh syntax highlighting once
+if [ -z $ZSH_SYNTAX_HIGHLIGHTING_LOADED ]; then
+  export ZSH_SYNTAX_HIGHLIGHTING_LOADED=1
+  source /usr/local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+

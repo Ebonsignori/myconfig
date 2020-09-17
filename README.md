@@ -27,7 +27,6 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - Then run:
     - `cd /usr/local/share/zsh`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
-    - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
      - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
      - You may need to run `gem install colorls --user-install`
@@ -54,7 +53,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
 
 ## OS-Specific Steps
 
-Copy SYNC file from Google Drive to OS.
+Copy SYNC files from Google Drive to OS.
 
 ### Mac OS
 

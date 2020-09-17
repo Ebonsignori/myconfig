@@ -24,12 +24,14 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
     - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
      - You may need to run `gem install colorls --user-install`
-- [npm](https://nodejs.org/en/download/)
+- [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+- [nvm](https://github.com/nvm-sh/nvm)
+  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
+  - `nvm install <node version>
+- [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`
   - `npm install -g spaceship-prompt`
-- [nvm](https://github.com/nvm-sh/nvm)
-  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
 - [python2](https://www.python.org/download/releases/2.0/)
   - Then run `python2 -m pip install --user --upgrade pynvim`
 - [python3](https://www.python.org/downloads/)

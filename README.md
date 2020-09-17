@@ -33,6 +33,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
      - You may need to run `gem install colorls --user-install`
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - [nvm](https://github.com/nvm-sh/nvm)
+  - Install [Ag](https://github.com/ggreer/the_silver_searcher)
   - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
   - `nvm install <node version>
 - [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
@@ -52,6 +53,8 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation).  
 
 ## OS-Specific Steps
+
+Copy SYNC file from Google Drive to OS.
 
 ### Mac OS
 

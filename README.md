@@ -23,6 +23,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - `echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
+     - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
      - You may need to run `gem install colorls --user-install`
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - [nvm](https://github.com/nvm-sh/nvm)

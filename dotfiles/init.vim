@@ -35,7 +35,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-snippets', 'coc-pairs', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker']
+let g:coc_global_extensions = ['coc-smartf', 'coc-snippets', 'coc-pairs', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker', 'coc-yaml']
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/nerdcommenter'
@@ -143,11 +143,13 @@ nnoremap <silent> J <C-d>
 " Indent w tab/shift tab
 nnoremap <M-Tab> :execute "normal! >>_"<CR>
 nnoremap <M-S-Tab> :execute "normal! <<_"<CR>
-vnoremap <M-Tab> :execute "normal! >gv"<CR>
-vnoremap <M-S-Tab> :execute "normal! <gv"<CR>
+vnoremap <M-Tab> >gv"
+vnoremap <M-S-Tab> <gv"
 
-" Reload nvim config
-nnoremap <M-r> :so $MYVIMRC<CR>
+" Reload nvim config in nvim config files
+autocmd! FileType vim nnoremap <M-r> :so $MYVIMRC<CR> 
+" Refresh buffer
+nnoremap <M-r> :edit<CR>
 " Close tab
 nnoremap <leader>c :tabc<CR>
 nnoremap <leader>o :tabo<CR>
@@ -286,6 +288,16 @@ nnoremap <leader>grr :diffput
 " Change color of git diff
 highlight DiffChange ctermfg=145 ctermbg=235
 highlight DiffText ctermfg=Black ctermbg=114
+" Custom func for git to accept both merge conflicts (remove all conflicts markers)
+"Creates the command :GremoveConflictMarkers
+function! RemoveConflictMarkers() range
+  echom a:firstline.'-'.a:lastline
+  execute a:firstline.','.a:lastline . ' g/^<\{7}\|^|\{7}\|^=\{7}\|^>\{7}/d'
+endfunction
+"-range=% default is whole file
+command! -range=% GremoveConflictMarkers <line1>,<line2>call RemoveConflictMarkers()
+nnoremap <leader>gb :GremoveConflictMarkers<CR>
+xnoremap <leader>gb :'<,'>GremoveConflictMarkers<CR>
 
 "
 " Vim-GitGutter
@@ -297,7 +309,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " Sessions
 "
 " Sessions are unique to branch
-let g:prosession_per_branch=1
+" let g:prosession_per_branch=1
 let g:prosession_on_startup = 1
 nnoremap <leader>s :echo prosession#ListSessions()<CR>
 nnoremap <leader><C-s> :Prosession
@@ -407,7 +419,21 @@ nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap ,b :Buffers<CR>
 nnoremap ,f :Ag<CR>
+" Toggle when open with same open command(s)
+autocmd! FileType fzf tnoremap <buffer> <C-p> <c-c>
+autocmd! FileType fzf tnoremap <buffer> ,b <c-c>
+autocmd! FileType fzf tnoremap <buffer> ,f <c-c>
+autocmd! FileType fzf nnoremap <buffer> <C-p> <C-w>c
+autocmd! FileType fzf nnoremap <buffer> ,b <C-w>c
+autocmd! FileType fzf nnoremap ,f <C-w>c
+
 command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
+command! -bang -nargs=* FzfAg                              
+  \ call fzf#vim#ag(<q-args>,
+  \                 '--ignore "node_modules"',  <--- any options here
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -455,10 +481,13 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" Use <c-@> to trigger completion.
+inoremap <silent><expr> <c-@> coc#refresh()
+" Use <leader>f to format
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" Use <cr> to confirm completion, `<C-g>u` 1means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -468,6 +497,7 @@ endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nnoremap <M-e> <Plug>(coc-diagnostic-info)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -510,10 +540,6 @@ function! GetVisualSelection()
     return substitute(escape(raw_search, '\/.*$^~[]'), "\n", '\\n', "g")
 endfunction
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -530,7 +556,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>af  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.

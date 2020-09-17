@@ -34,6 +34,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - `npm i -g bash-language-server`
   - `npm install -g spaceship-prompt`
 - [python2](https://www.python.org/download/releases/2.0/)
+  - Install [pip](https://pip.pypa.io/en/stable/installing/)
   - Then run `python2 -m pip install --user --upgrade pynvim`
 - [python3](https://www.python.org/downloads/)
   - Then run `python3 -m pip install --user --upgrade pynvim`

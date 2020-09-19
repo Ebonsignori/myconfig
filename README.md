@@ -38,10 +38,10 @@ export MY_CONFIG_AUTO_OVERWRITE=false
      - You may need to run `sudo apt-get install ruby-dev` and `sudo apt-get install ubuntu-dev-tools` on Ubuntu
      - You may need to run `gem install colorls --user-install`
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-- [nvm](https://github.com/nvm-sh/nvm)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
-  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
-  - `nvm install <node version>
+- [nvm](https://github.com/nvm-sh/nvm)
+  - For nvm install make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
+  - `nvm install <node version>`
 - [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`

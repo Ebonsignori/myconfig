@@ -4,6 +4,8 @@ This is my personal configuration to follow when setting up a new machine or ser
 
 ## Terminal
 
+Clone this repo into `~/Projects`
+
 The desired workflow of this project is to make changes to configurations in [dotfiles](./dotfiles) in this project and to copy and replace local configurations with the changes. This way this project serves as myconfig's source of truth. The expections to this are directories/files that are manually backed up. See [Manual Backup](#manual-backup/restore).
 
 For automatic replacement after update, we need to export a variable pointing to where this repo is cloned to and run the [init.sh](./init.sh) script.
@@ -13,16 +15,15 @@ We do this by adding the following lines to the end of your `~/.zshrc` or `~/.ba
 ```
 # Load myconfig profile *NOTE:* Place at bottom of .zshrc
 export MY_CONFIG_PROJECT_DIR=~/Projects/myconfig
+export MY_CONFIG_AUTO_OVERWRITE=true 
 source $MY_CONFIG_PROJECT_DIR/init.sh
 ```
 
-Optionally you can add the following to override config files without asking for confirmation
+Optionally you can require confirmation prompts when overriding config files:
 
 ```
-export MY_CONFIG_AUTO_OVERWRITE=true  
+export MY_CONFIG_AUTO_OVERWRITE=false  
 ```
-
-Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.myconfig/init/init.sh`
 
 ## Prereqs
 
@@ -62,7 +63,7 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - Set downloads path to `~/Downloads/Web`
 - Copy SYNC files from Google Drive to OS.
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font and set it for your terminal. Follow instructions for Linux or Mac. I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation). You can download the fonts directly from [here](https://www.nerdfonts.com/font-downloads).
-- Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/)
+- Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
 - Install [Insomnia Core REST Client](https://insomnia.rest/)
 - Install [DBeaver](https://dbeaver.io/)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
@@ -76,21 +77,32 @@ Initialization script that should be sourced within `~/.zshrc` e.g. `source ~/.m
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
 - Redeem [BetterSnapTool](https://folivora.ai/bettersnaptool) from App Store.
 - Download a clipboard manager, like [CopyClip](https://fiplab.com/apps/copyclip-for-mac).
+- Add shortcut to start Finder: `Ctrl + Shift + Alt + F`
+- Add shortcut to start Term: `Ctrl + Shift + Alt + T`
 
 ### Linux (Gnome)
 
 - In Gnome Tweak tool set Caps Lock as Ctrl
-- Install [Albert](https://albertlauncher.github.io/docs/installing/#using-official-albert-repositories) and enable plugins to replace spotlight. Bind it to `ctrl + space`
-- Get and use [Mac OS themes](https://www.opendesktop.org/p/1220826/).
-- Get and use [Mac OS icons](https://www.pling.com/p/1102582/).
-- Install [deepin-screenshot](https://www.deepin.org/en/original/deepin-screenshot/) and [deeping-screen-recorder](https://www.deepin.org/en/original/deepin-screen-recorder/) and bind them to shift+ctrl+alt+4 and shift+ctrl+alt+5 respectively
+- Install [Albert](https://albertlauncher.github.io/docs/installing/#using-official-albert-repositories) and enable plugins to replace spotlight. Bind it to `Ctrl + Space`
+- Install [deepin-screenshot](https://www.deepin.org/en/original/deepin-screenshot/) and [deeping-screen-recorder](https://www.deepin.org/en/original/deepin-screen-recorder/) and bind them to `shift+ctrl+4` and `shift+ctrl+5` respectively
+- Shortcut `Ctrl + Alt + Delete` to Activity Monitor
+- Change `Alt+Tab` binding to `Alt + Shift + Tab`
+- Change terminal binding to `Ctrl + Shift + Alt + T`
+- Add shortcut to start File browser (`nautilus` in Ubuntu): `Ctrl + Shift + Alt + F`
 - Download a clipboard manager, like [CopyQ](https://hluk.github.io/CopyQ/).
-- Shortcut Ctrl+Alt+Delete to Activity Monitor
-- Change Alt+Tab binding to Alt+Shift+Tab
 - Terminal. If not default, I prefer [Gnome Terminal](https://help.gnome.org/users/gnome-terminal/stable/)
   - Set Nerdfont
   - Set new tab/close tab/change tab shortcuts to match Mac OS shortcuts
-
+- `sudo apt-get install gnome-sushi` to get Mac-OS like preview
+- Set up Mac OS-Like Theme
+  - Get and use [Mac OS themes](https://www.opendesktop.org/p/1220826/).
+  - Set them in Gnome tool then move close btns to the LHS with: `gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:"`
+  - Get and use [Mac OS icons](https://www.pling.com/p/1102582/).
+  - Install and use [Dash To Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/) (Dash to Doc is more mac like but at time of writing doesn't enable hover previews)
+    - Enable persistent top-bar, opacity, auto-hide, and change non-active window indicators. 
+  - Install and use [BLYR](https://extensions.gnome.org/extension/1251/blyr/)
+  - Use Mac San Francisco [Fonts](https://www.gnome-look.org/p/1213208/)
+  
 ## Manual Backup / Restore
 
 If on new setup, copy directories below per instructions, otherwise to backup directories run `sh backup.sh`.

@@ -82,6 +82,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Add shortcut to start Term: `Ctrl + Shift + Alt + T`
 
 ### Linux (Gnome)
+- Install Gnome Tweak Tool, sudo apt install gnome-tweak-tool
 
 - In Gnome Tweak tool set Caps Lock as Ctrl
 - Install [Albert](https://albertlauncher.github.io/docs/installing/#using-official-albert-repositories) and enable plugins to replace spotlight. Bind it to `Ctrl + Space`

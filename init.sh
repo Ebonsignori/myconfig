@@ -26,6 +26,9 @@ TMUX_CONFIG_PATH=~/.tmux.conf
 GLOBAL_GITCONFIG_PATH=~/.gitconfig
 GLOBAL_GITCONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.gitconfig
 ZSH_PROFILE_PROJECT_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/zsh_profile
+VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN=$MY_CONFIG_PROJECT_DIR/dotfiles/nerdtree_mappings.vim
+VIM_NERDTREE_PLUGIN_CONFIG_PATH=~/.vim/nerdtree_plugin/
+VIM_NERDTREE_PLUGIN_CONFIG_FILE=$VIM_NERDTREE_PLUGIN_CONFIG_PATH/mymapping.vim
 
 # Script constants
 FALSE=225
@@ -74,6 +77,7 @@ main() {
   create_replace_dotfile $NVIM_CONFIG_PATH $NVIM_CONFIG_ORIGIN_PATH
   create_replace_dotfile $TMUX_CONFIG_PATH $TMUX_CONFIG_ORIGIN_PATH
   create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
+  create_replace_dotfile $VIM_NERDTREE_PLUGIN_CONFIG_FILE $VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN
 
   # Source plugins
   source $GIT_PROMPT_PATH
@@ -112,13 +116,14 @@ create_directories() {
 		 exit $crate_dir_status 
 	fi
   
-	create_directory $NVIM_CONFIG_DIR
+  
+	create_directory $VIM_NERDTREE_PLUGIN_CONFIG_PATH
 	create_dir_status=$?
 	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$NVIM_CONFIG_DIR'"
+	   echo "Failed to create '$VIM_NERDTREE_PLUGIN_CONFIG'"
 		 exit $crate_dir_status 
 	fi
-  
+
   create_directory $MY_CONFIG_DIR/.vim_undo_history
 	create_dir_status=$?
 	if ! $(exit $create_dir_status); then

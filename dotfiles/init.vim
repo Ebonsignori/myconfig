@@ -122,30 +122,16 @@ set mouse=n
 "
 " Custom keybindings
 "
-" Go down and up page with <shift>j,k
-" DEPRECATED: Scrolls page and not cursor / to jumpy
-" function! ScrollQuarter(move)
-    " let height=winheight(0)
-
-    " if a:move == 'up'
-        " let key="\<C-Y>"
-    " else
-        " let key="\<C-E>"
-    " endif
-
-    " " Nav 1/4th (25%) of page
-    " execute 'normal! ' . height/4 . key
-" endfunction
-" nnoremap <silent> K :call ScrollQuarter('up')<CR>
-" nnoremap <silent> J :call ScrollQuarter('down')<CR>
+" Up and down with shift K/J
 nnoremap <silent> K <C-u> 
 nnoremap <silent> J <C-d> 
-" Indent w tab/shift tab
-nnoremap <M-Tab> :execute "normal! >>_"<CR>
-nnoremap <M-S-Tab> :execute "normal! <<_"<CR>
-vnoremap <M-Tab> >gv"
-vnoremap <M-S-Tab> <gv"
-
+" Indent w < and >
+nnoremap > :execute "normal! >>_"<CR>
+nnoremap < :execute "normal! <<_"<CR>
+vnoremap > >gv"
+vnoremap < <gv"
+xnoremap > >gv"
+xnoremap < <gv"
 " Reload nvim config in nvim config files
 autocmd! FileType vim nnoremap <M-r> :so $MYVIMRC<CR> 
 " Refresh buffer
@@ -166,6 +152,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+inoremap <C-h> <Esc><C-w>h
+inoremap <C-j> <Esc><C-w>j
+inoremap <C-k> <Esc><C-w>k
+inoremap <C-l> <Esc><C-w>l
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -217,6 +207,10 @@ nnoremap <Leader>b :e
 " Nav to prev/next buffer
 nnoremap ,k :bp<CR>
 nnoremap ,j :bn<CR>
+tnoremap ,k <C-\><C-n>:bp<CR>
+tnoremap ,j <C-\><C-n>:bn<CR>
+" inoremap ,k <Esc>:bp<CR>
+" inoremap ,j <Esc>:bn<CR>
 " Close current buffer
 nnoremap ,c :bd<CR>
 " Close all other open buffers
@@ -401,7 +395,6 @@ nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 " Fix to allow OnTabEnter to work
 let g:NERDTreeHijackNetrw = 0
 
-
 "
 " Terminal Config
 "
@@ -434,7 +427,7 @@ command! -bang -nargs=* FzfAg
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
-
+:
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -636,4 +629,4 @@ vnoremap <silent> # :<C-U>
 " Filetype configs
 "
 filetype plugin on
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 stop=2

@@ -37,6 +37,10 @@ export MY_CONFIG_AUTO_OVERWRITE=false
      - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
      - You may need to run `sudo apt-get install ruby-dev` and `sudo apt-get install ubuntu-dev-tools` on Ubuntu
      - You may need to run `gem install colorls --user-install`
+     - You may need to add the following to your `~/.zshrc`
+     ```
+     PATH=$PATH:$(ruby -e 'puts Gem.bindir')
+     ```
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
 - [nvm](https://github.com/nvm-sh/nvm)
@@ -82,8 +86,8 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Add shortcut to start Term: `Ctrl + Shift + Alt + T`
 
 ### Linux (Gnome)
-- Install Gnome Tweak Tool, sudo apt install gnome-tweak-tool
 
+- Install Gnome Tweak Tool, `sudo apt install gnome-tweak-tool`
 - In Gnome Tweak tool set Caps Lock as Ctrl
 - Install [Albert](https://albertlauncher.github.io/docs/installing/#using-official-albert-repositories) and enable plugins to replace spotlight. Bind it to `Ctrl + Space`
 - Install [deepin-screenshot](https://www.deepin.org/en/original/deepin-screenshot/) and [deeping-screen-recorder](https://www.deepin.org/en/original/deepin-screen-recorder/) and bind them to `shift+ctrl+4` and `shift+ctrl+5` respectively

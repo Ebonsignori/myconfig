@@ -39,7 +39,11 @@ export MY_CONFIG_AUTO_OVERWRITE=false
      - You may need to run `gem install colorls --user-install`
      - You may need to add the following to your `~/.zshrc`
      ```
-     PATH=$PATH:$(ruby -e 'puts Gem.bindir')
+     path+=(
+        $(ruby -e 'puts File.join(Gem.user_dir, "bin")')
+     )
+     export PATH="$HOME/.rbenv/bin:$PATH"
+     eval "$(rbenv init -)"
      ```
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
@@ -63,7 +67,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 
 - Install [Chrome](https://www.google.com/chrome/)
   - Set up Sync
-  - Sign into LastPass
+  - Sign into PW Manager
   - Sign into Raindrop.io
   - Set downloads path to `~/Downloads/Web`
 - Copy SYNC files from Google Drive to OS.
@@ -108,6 +112,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
     - Enable persistent top-bar, opacity, auto-hide, and change non-active window indicators. 
   - Install and use [BLYR](https://extensions.gnome.org/extension/1251/blyr/)
   - Use Mac San Francisco [Fonts](https://www.gnome-look.org/p/1213208/)
+- Add CopyQ, Albert, and Stretchly to Startup Applications via Gnome Tweak Tool
   
 ## Manual Backup / Restore
 

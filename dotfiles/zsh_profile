@@ -17,8 +17,8 @@ case "$OSTYPE" in
   ;;
   linux*)
   # Alias pbcopy / pbpaste for linux
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
+  alias pbcopy='xsel -ib'
+  alias pbpaste='xsel -ob'
   # Alias nautilus to open
   openFunction() {
     nohup nautilus $1 > /dev/null 2>&1 & disown

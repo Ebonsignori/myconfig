@@ -28,7 +28,8 @@ Plug 'joshdick/onedark.vim'
 " cSpell:disable
 " Plug 'tomasiser/vim-code-dark'
 " File Explorer
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' |
+   \ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 " Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -71,6 +72,8 @@ Plug '907th/vim-auto-save'
 Plug 'chrisbra/Colorizer'
 " Rainbow parens
 Plug 'luochen1990/rainbow'
+" Word coersion (e.g.) to snake_case
+Plug 'tpope/vim-abolish'
 " cSpell:enable
 call plug#end()
 
@@ -79,6 +82,21 @@ call plug#end()
 "Config Section
 "
 "
+" Use system clipboard
+if has('unix')
+  let g:clipboard = {
+    \ 'name': 'xsel',
+    \ 'copy': {
+    \     '+': 'xsel -ib',
+    \     '*': 'xsel -ip'
+    \ },
+    \ 'paste': {
+    \     '+': 'xsel -ob',
+    \     '*': 'xsel -op'
+    \ },
+    \ 'cache_enabled': 1
+    \ }
+endif
 " Use hybrid line numbers
 set number 
 " Highlight cursor line
@@ -392,6 +410,8 @@ let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 " Toggle
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+" Toggle to current file
+nnoremap <silent> <leader><C-b> :NERDTreeFind<CR>
 " Fix to allow OnTabEnter to work
 let g:NERDTreeHijackNetrw = 0
 

@@ -35,12 +35,21 @@ export MY_CONFIG_AUTO_OVERWRITE=false
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
      - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+     - You may need to run `sudo apt-get install ruby-dev` and `sudo apt-get install ubuntu-dev-tools` on Ubuntu
      - You may need to run `gem install colorls --user-install`
+     - You may need to add the following to your `~/.zshrc`
+     ```
+     path+=(
+        $(ruby -e 'puts File.join(Gem.user_dir, "bin")')
+     )
+     export PATH="$HOME/.rbenv/bin:$PATH"
+     eval "$(rbenv init -)"
+     ```
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-- [nvm](https://github.com/nvm-sh/nvm)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
-  - Make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
-  - `nvm install <node version>
+- [nvm](https://github.com/nvm-sh/nvm)
+  - For nvm install make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
+  - `nvm install <node version>`
 - [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`
@@ -58,7 +67,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 
 - Install [Chrome](https://www.google.com/chrome/)
   - Set up Sync
-  - Sign into LastPass
+  - Sign into PW Manager
   - Sign into Raindrop.io
   - Set downloads path to `~/Downloads/Web`
 - Copy SYNC files from Google Drive to OS.
@@ -82,6 +91,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 
 ### Linux (Gnome)
 
+- Install Gnome Tweak Tool, `sudo apt install gnome-tweak-tool`
 - In Gnome Tweak tool set Caps Lock as Ctrl
 - Install [Albert](https://albertlauncher.github.io/docs/installing/#using-official-albert-repositories) and enable plugins to replace spotlight. Bind it to `Ctrl + Space`
 - Install [deepin-screenshot](https://www.deepin.org/en/original/deepin-screenshot/) and [deeping-screen-recorder](https://www.deepin.org/en/original/deepin-screen-recorder/) and bind them to `shift+ctrl+4` and `shift+ctrl+5` respectively
@@ -102,6 +112,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
     - Enable persistent top-bar, opacity, auto-hide, and change non-active window indicators. 
   - Install and use [BLYR](https://extensions.gnome.org/extension/1251/blyr/)
   - Use Mac San Francisco [Fonts](https://www.gnome-look.org/p/1213208/)
+- Add CopyQ, Albert, and Stretchly to Startup Applications via Gnome Tweak Tool
   
 ## Manual Backup / Restore
 

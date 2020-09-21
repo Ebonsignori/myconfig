@@ -47,6 +47,8 @@ Plug 'kassio/neoterm'
 " Version control
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" Allow :Gbrowse to open in Github
+Plug 'tpope/vim-rhubarb'
 " Status bar
 Plug 'vim-airline/vim-airline'
 " Tab bar

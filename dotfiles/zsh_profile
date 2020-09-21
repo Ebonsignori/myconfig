@@ -24,6 +24,11 @@ case "$OSTYPE" in
     nohup nautilus $1 > /dev/null 2>&1 & disown
   }
   alias open='openFunction'
+  # Set gnome-terminal tab titles
+  function set-title() {
+    printf "\e]2;$1\a"
+  }
+  set-title `pwd | sed 's#.*/##'`
   ;;
 esac
 

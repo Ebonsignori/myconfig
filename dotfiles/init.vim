@@ -249,6 +249,11 @@ nnoremap <leader>u :CallLastWindow<CR>
 nnoremap <C-w><M-1> :resize 15<CR>
 nnoremap <C-w><M-2> :resize 25<CR>
 nnoremap <C-w><M-3> :resize 50<CR>
+" Resize windows with arrow keys
+nnoremap <Left> :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+nnoremap <Up> :resize -2<CR>
+nnoremap <Down> :resize +2<CR>
 
 " Increment / decrement 
 " Force decimal-based arithmetic
@@ -420,30 +425,105 @@ let g:NERDTreeHijackNetrw = 0
 "
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
+" Ctrl+w break for terminal
+tmap <C-w> <Esc><C-w>
+tmap <C-b> <Esc><C-b>
+" Toggle terminal off
+tmap <M-t> <Esc><C-w>c
+
 " start terminal in insert mode
 autocmd BufWinEnter,WinEnter term://* startinsert
-nnoremap <leader><M-t> :terminal<CR>
+nnoremap ,<M-t> :terminal<CR>
 nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
+" Open terminal at current dir
+nnoremap <leader><M-t> :let $VIM_DIR=expand('%:p:h')<CR> <bar> :lcd $VIM_DIR<CR> <bar> :split<CR> <bar> :resize 15<CR> <bar> :term<CR> 
+" With this function you can reuse the same terminal in neovim.
+" You can toggle the terminal and also send a command to the same terminal.
+let s:monkey_terminal_window = -1
+let s:monkey_terminal_buffer = -1
+let s:monkey_terminal_job_id = -1
+function! MonkeyTerminalOpen()
+  " Check if buffer exists, if not create a window and a buffer
+  if !bufexists(s:monkey_terminal_buffer)
+    " Creates a window call monkey_terminal
+    new monkey_terminal
+    " Moves to the window the right the current one
+    wincmd J
+    let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
 
+     " Change the name of the buffer to "Terminal 1"
+     silent file Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
+     let s:monkey_terminal_buffer = bufnr('%')
 
+    " The buffer of the terminal won't appear in the list of the buffers
+    " when calling :buffers command
+    set nobuflisted
+  else
+    if !win_gotoid(s:monkey_terminal_window)
+    sp
+    " Moves to the window below the current one
+    wincmd J   
+    buffer Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
+    endif
+  endif
+endfunction
+
+function! MonkeyTerminalToggle()
+  if win_gotoid(s:monkey_terminal_window)
+    call MonkeyTerminalClose()
+  else
+    call MonkeyTerminalOpen()
+  endif
+endfunction
+
+function! MonkeyTerminalClose()
+  if win_gotoid(s:monkey_terminal_window)
+    " close the current window
+    hide
+  endif
+endfunction
+
+function! MonkeyTerminalExec(cmd)
+  if !win_gotoid(s:monkey_terminal_window)
+    call MonkeyTerminalOpen()
+  endif
+
+  " clear current input
+  call jobsend(s:monkey_terminal_job_id, "clear\n")
+
+  " run cmd
+  call jobsend(s:monkey_terminal_job_id, a:cmd . "\n")
+  normal! G
+  wincmd p
+endfunction
+
+" With this maps you can now toggle the terminal
+nnoremap <F7> :call MonkeyTerminalToggle()<cr>
+tnoremap <F7> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
+
+" This an example on how specify command with different types of files.
+" augroup go
+    " autocmd!
+    " autocmd BufRead,BufNewFile *.go set filetype=go
+    " autocmd FileType go nnoremap <F5> :call MonkeyTerminalExec('go run ' . expand('%'))<cr>
+" augroup END
+    
 "
 " Search Config
 "
+" Open commands
 nnoremap <C-p> :FZF<CR>
 nnoremap ,b :Buffers<CR>
 nnoremap ,f :Ag<CR>
-" Toggle when open with same open command(s)
-autocmd! FileType fzf tnoremap <buffer> <C-p> <c-c>
-autocmd! FileType fzf tnoremap <buffer> ,b <c-c>
-autocmd! FileType fzf tnoremap <buffer> ,f <c-c>
-autocmd! FileType fzf nnoremap <buffer> <C-p> <C-w>c
-autocmd! FileType fzf nnoremap <buffer> ,b <C-w>c
-autocmd! FileType fzf nnoremap ,f <C-w>c
 
 command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
 command! -bang -nargs=* FzfAg                              
   \ call fzf#vim#ag(<q-args>,
-  \                 '--ignore "node_modules"',  <--- any options here
+  \                 '--ignore "node_modules"',
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
@@ -459,7 +539,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " Prevent fzf bug when pressing esc in window
 if has("nvim")
   au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-  au FileType fzf tunmap <buffer> <Esc>
+  " au FileType fzf tunmap <buffer> <Esc>
 endif
 
 "

@@ -14,6 +14,8 @@ export VISUAL=/usr/local/bin/nvim
 case "$OSTYPE" in
   darwin*)
     # MAC OS Specific settings
+    # Start ssh-agent
+    alias startSsh='eval "$(ssh-agent -s)"'
   ;;
   linux*)
   # Alias pbcopy / pbpaste for linux

@@ -84,21 +84,41 @@ call plug#end()
 "Config Section
 "
 "
-" Use system clipboard
+" System-specifc configs
 if has('unix')
-  let g:clipboard = {
-    \ 'name': 'xsel',
-    \ 'copy': {
-    \     '+': 'xsel -ib',
-    \     '*': 'xsel -ip'
-    \ },
-    \ 'paste': {
-    \     '+': 'xsel -ob',
-    \     '*': 'xsel -op'
-    \ },
-    \ 'cache_enabled': 1
-    \ }
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Linux"
+    " Assume Linux
+    let g:clipboard = {
+      \ 'name': 'xsel',
+      \ 'copy': {
+      \     '+': 'xsel -ib',
+      \     '*': 'xsel -ip'
+      \ },
+      \ 'paste': {
+      \     '+': 'xsel -ob',
+      \     '*': 'xsel -op'
+      \ },
+      \ 'cache_enabled': 1
+      \ }
+  else 
+    " Assume Mac
+    set clipboard+=unnamedplus
+    let g:clipboard = {
+      \ 'name': 'pbcopypaste',
+      \ 'copy': {
+      \     '+': 'pbcopy',
+      \     '*': 'pbcopy'
+      \ },
+      \ 'paste': {
+      \     '+': 'pbpaste',
+      \     '*': 'pbpaste'
+      \ },
+      \ 'cache_enabled': 1
+      \ }
+  endif
 endif
+
 " Use hybrid line numbers
 set number 
 " Highlight cursor line

@@ -36,7 +36,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-smartf', 'coc-snippets', 'coc-pairs', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker', 'coc-yaml']
+let g:coc_global_extensions = ['coc-smartf', 'coc-snippets', 'coc-pairs', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker', 'coc-yaml', 'coc-actions']
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/nerdcommenter'
@@ -65,7 +65,7 @@ Plug 'gcmt/taboo.vim'
 " Undo History Browser
 Plug 'mbbill/undotree'
 " Copy/Yank history keeper
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
 " Window manager
 Plug 'paroxayte/vwm.vim'
 " Autosave
@@ -101,9 +101,8 @@ if has('unix')
       \ },
       \ 'cache_enabled': 1
       \ }
-  else 
+  else
     " Assume Mac
-    set clipboard+=unnamedplus
     let g:clipboard = {
       \ 'name': 'pbcopypaste',
       \ 'copy': {
@@ -637,6 +636,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" File rename
+nmap <leader>rf :CocCommand workspace.renameCurrentFile<CR>
 
 " Rename in regular or visual mode, lowercase for paragraph, upper for scope
 " From: https://www.reddit.com/r/vim/comments/1zvks1/best_way_to_rename_variable_in_several_spots_in_a/cfxfwb0?utm_source=share&utm_medium=web2x&context=3

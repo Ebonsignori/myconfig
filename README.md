@@ -76,6 +76,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Install [Insomnia Core REST Client](https://insomnia.rest/)
 - Install [DBeaver](https://dbeaver.io/)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
+- Install Doc explorer, [Zeal](https://zealdocs.org/)
 - Install Slack, Discord, and Spotify with package mangager or in app store.
 
 ### Mac OS

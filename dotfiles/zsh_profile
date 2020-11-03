@@ -3,8 +3,8 @@ alias vi='nvim'
 alias v='nvim'
 alias useNode='nvm install `node -p -e require("./package").engines.node`'
 alias update="source ~/.zshrc"
-alias l='colorls --group-directories-first --almost-all'
-alias ll='colorls --group-directories-first --almost-all --long' # detailed list view
+alias l='colorls --group-directories-first --almost-all --light'
+alias ll='colorls --group-directories-first --almost-all --long --light' # detailed list view
 
 # Change default editor
 export EDITOR=/usr/local/bin/nvim
@@ -78,3 +78,7 @@ if [ -z $ZSH_SYNTAX_HIGHLIGHTING_LOADED ]; then
   source /usr/local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_VI_MODE_COLOR=grey
+spaceship_vi_mode_enable

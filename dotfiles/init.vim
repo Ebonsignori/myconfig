@@ -292,9 +292,11 @@ xnoremap - g<C-x>
 " Theme Opts
 "
 "
+
 " Cycle through themes function
 let g:total_themes = 2
 let g:current_theme_num = g:total_themes 
+set termguicolors
 function! CycleTheme()
   if (g:current_theme_num >= g:total_themes)
     let g:current_theme_num = 0
@@ -307,12 +309,19 @@ function! CycleTheme()
     " github theme
     colorscheme github
     let g:airline_theme='github'
+    let g:github_colors_soft = 0
     set background=light
+    " Tabline Colors for github theme
+    hi TabLine ctermfg=grey ctermbg=236 cterm=NONE
+    hi TabLineSel ctermfg=white  ctermbg=114  cterm=NONE cterm=bold
   elseif (g:current_theme_num == 1)
     " onedark theme
     colorscheme onedark
     let g:airline_theme='onedark'
     set background=dark
+    " Tabline Colors for Onedark theme
+    hi TabLine ctermfg=145 ctermbg=236 cterm=NONE
+    hi TabLineSel ctermfg=black  ctermbg=114  cterm=NONE cterm=bold
   endif
 endfunction
 
@@ -391,16 +400,6 @@ nnoremap <leader>p :Yanks<CR>
 "
 " Tabline config
 "
-" Uncomment to test theme colors
-" let theme_colors = onedark#GetColors()
-" let test_var = theme_colors.black.cterm
-" echo "color: " . test_var
-" Colors: 114 = green, 236 = light grey, 145 = light white, 235 = term bg / black
-
-" Colors for Onedark theme
-hi TabLine ctermfg=145 ctermbg=236 cterm=NONE
-" hi TabLineFill  ctermfg=lightgrey  ctermbg=darkgrey cterm=NONE
-hi TabLineSel ctermfg=Black  ctermbg=114  cterm=NONE cterm=bold
 
 function! Tabline()
   let s = ''

@@ -79,6 +79,10 @@ Plug 'chrisbra/Colorizer'
 Plug 'luochen1990/rainbow'
 " Word coersion (e.g.) to snake_case
 Plug 'tpope/vim-abolish'
+" Visually show line indents
+Plug 'Yggdroot/indentLine'
+" Allow collapse/expand in yaml
+Plug 'pedrohdz/vim-yaml-folds'
 " cSpell:enable
 call plug#end()
 
@@ -138,6 +142,8 @@ set tabstop=2
 set clipboard^=unnamed,unnamedplus
 set expandtab
 set laststatus=2
+" Fold after 20 lines
+set foldlevelstart=20
 " open new split panes to right and below
 set splitright
 set splitbelow
@@ -183,8 +189,8 @@ nnoremap <leader>c :tabc<CR>
 nnoremap <leader>o :tabo<CR>
 " Save
 nnoremap <C-s> :w<CR>
-" Quit
-nnoremap <C-q> :q<CR> 
+" Close all other buffers
+nnoremap <C-q> :bufdo bd!<CR> 
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
@@ -735,9 +741,15 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "
 nnoremap <F5> :UndotreeToggle<cr>
 if has("persistent_undo")
-    set undodir=$MY_CONFIG_DIR/vim_undo_history
-    set undofile
+  set undodir=$MY_CONFIG_DIR/vim_undo_history
+  set undofile
 endif
+
+"
+" indentLine config 
+"
+let g:indentLine_char = '⦙'
+
 
 "
 " Scripts
@@ -766,3 +778,5 @@ vnoremap <silent> # :<C-U>
 "
 filetype plugin on
 autocmd FileType javascript setlocal shiftwidth=2 stop=2
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+

@@ -83,7 +83,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 
 - In Preferences -> keyboard -> modifier keys -> Set Caps Lock to Ctrl
 - Install iTerm2 
-  - Set theme to [github](https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Github.itermcolors) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
+  - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
 - Install [Brew](https://brew.sh/)
 - Redeem [BetterSnapTool](https://folivora.ai/bettersnaptool) from App Store.

@@ -78,6 +78,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
 - Install Doc explorer, [Zeal](https://zealdocs.org/)
 - Install Slack, Discord, and Spotify with package mangager or in app store.
+- Install [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl) and set up zsh autocompletions for it
 
 ### Mac OS
 

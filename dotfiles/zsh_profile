@@ -85,6 +85,8 @@ if [ -z $ZSH_SYNTAX_HIGHLIGHTING_LOADED ]; then
   source /usr/local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# Add kubectl autocomplete
+source <(kubectl completion zsh)
 
 SPACESHIP_EXIT_CODE_SHOW=true
 SPACESHIP_VI_MODE_COLOR=grey

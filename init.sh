@@ -55,7 +55,7 @@ main() {
   if [ ! -d $ZSH_AUTOCOMPLETE_PATH ]; then
     echo 'Downloading zsh autocomplete plugin'
     git clone https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_AUTOCOMPLETE_PATH
-	fi
+  fi
 
   # Load git bash/zsh completion
   case $SHELL in
@@ -84,7 +84,8 @@ main() {
   if [ -n "$ZSH_VERSION" ]; then
     # Source this to act as a sort of .bash_profile for zsh in this project
     source $ZSH_PROFILE_PROJECT_PATH
-    source $ZSH_AUTOCOMPLETE_FILE
+    # Uncomment to enable zsh auto-complete
+    # source $ZSH_AUTOCOMPLETE_FILE
   fi
 
   # Export vars to be picked up in shell when this is sourced

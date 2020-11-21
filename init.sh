@@ -92,7 +92,7 @@ main() {
   export MY_CONFIG_DIR=$MY_CONFIG_DIR
   export MY_BIN_DIR=$MY_BIN_DIR
 
-  echo 'Initalized .myconifg'
+  echo 'Initalized .myconfig'
 }
 
 create_directories() {

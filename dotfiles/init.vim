@@ -83,6 +83,12 @@ Plug 'tpope/vim-abolish'
 Plug 'Yggdroot/indentLine'
 " Allow collapse/expand in yaml
 Plug 'pedrohdz/vim-yaml-folds'
+" Terraform format 
+Plug 'hashivim/vim-terraform'
+" Tab align plugin
+Plug 'godlygeek/tabular'
+" Movement with camelCase & snake_case words
+Plug 'bkad/CamelCaseMotion'
 " cSpell:enable
 call plug#end()
 
@@ -253,16 +259,16 @@ nmap <M-O> O<Esc>j
 " Open new buffer with entered file
 nnoremap <Leader>b :e 
 " Nav to prev/next buffer
-nnoremap ,k :bp<CR>
-nnoremap ,j :bn<CR>
-tnoremap ,k <C-\><C-n>:bp<CR>
-tnoremap ,j <C-\><C-n>:bn<CR>
+" nnoremap ,k :bp<CR>
+" nnoremap ,j :bn<CR>
+" tnoremap ,k <C-\><C-n>:bp<CR>
+" tnoremap ,j <C-\><C-n>:bn<CR>
 " inoremap ,k <Esc>:bp<CR>
 " inoremap ,j <Esc>:bn<CR>
 " Close current buffer
-nnoremap ,c :bd<CR>
+" nnoremap ,c :bd<CR>
 " Close all other open buffers
-nnoremap ,o :%bdelete<bar>edit #<bar>normal `"<CR>
+" nnoremap ,o :%bdelete<bar>edit #<bar>normal `"<CR>
 
 " Reopen last closed window with <leader>u
 augroup bufclosetrack
@@ -320,6 +326,11 @@ function! CycleTheme()
     " Tabline Colors for github theme
     hi TabLine ctermfg=grey ctermbg=236 cterm=NONE
     hi TabLineSel ctermfg=white  ctermbg=114  cterm=NONE cterm=bold
+    " Change color of git diff
+    hi DiffChange guibg=#CDFFD8 guifg=black
+    hi DiffAdd gui=NONE guibg=#ACF2BD guifg=black
+    hi DiffText guibg=#ACF2BD guifg=black
+    hi DiffDelete guibg=#FDEEF0 guifg=#F8B8C0
   elseif (g:current_theme_num == 1)
     " onedark theme
     colorscheme onedark
@@ -328,6 +339,9 @@ function! CycleTheme()
     " Tabline Colors for Onedark theme
     hi TabLine ctermfg=145 ctermbg=236 cterm=NONE
     hi TabLineSel ctermfg=black  ctermbg=114  cterm=NONE cterm=bold
+    " Change color of git diff
+    highlight DiffChange ctermfg=145 ctermbg=235
+    highlight DiffText ctermfg=Black ctermbg=114
   endif
 endfunction
 
@@ -351,9 +365,6 @@ nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gr :diffget //2<CR>
 " Revert change in diff view
 nnoremap <leader>grr :diffput
-" Change color of git diff
-highlight DiffChange ctermfg=145 ctermbg=235
-highlight DiffText ctermfg=Black ctermbg=114
 " Custom func for git to accept both merge conflicts (remove all conflicts markers)
 "Creates the command :GremoveConflictMarkers
 function! RemoveConflictMarkers() range
@@ -364,6 +375,12 @@ endfunction
 command! -range=% GremoveConflictMarkers <line1>,<line2>call RemoveConflictMarkers()
 nnoremap <leader>gb :GremoveConflictMarkers<CR>
 xnoremap <leader>gb :'<,'>GremoveConflictMarkers<CR>
+
+"
+" CamelCaseMotion config
+"
+" Set leader for camelCaseMotion to ,
+let g:camelcasemotion_key = ','
 
 "
 " Vim-GitGutter
@@ -474,7 +491,6 @@ tmap <M-t> <Esc><C-w>c
 
 " start terminal in insert mode
 autocmd BufWinEnter,WinEnter term://* startinsert
-nnoremap ,<M-t> :terminal<CR>
 nnoremap <M-t> :split <bar> resize 15 <bar> term<CR>
 " Open terminal at current dir
 nnoremap <leader><M-t> :let $VIM_DIR=expand('%:p:h')<CR> <bar> :lcd $VIM_DIR<CR> <bar> :split<CR> <bar> :resize 15<CR> <bar> :term<CR> 
@@ -558,8 +574,8 @@ tnoremap <F7> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 "
 " Open commands
 nnoremap <C-p> :FZF<CR>
-nnoremap ,b :Buffers<CR>
-nnoremap ,f :Ag<CR>
+" nnoremap ,b :Buffers<CR>
+nnoremap <leader>ff :Ag<CR>
 
 command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
 command! -bang -nargs=* FzfAg                              
@@ -598,6 +614,11 @@ let g:NERDCreateDefaultMappings = 0
 vnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
 nnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
 
+"
+" vim-terraform config
+"
+let g:terraform_align=0
+let g:terraform_fmt_on_save=0
 
 "
 " coc.nvim (autocomplete/JS stuff) config
@@ -617,8 +638,8 @@ endfunction
 " Use <c-@> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
 " Use <leader>f to format
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm <Plug>(coc-format-selected)
 
 " Use <cr> to confirm completion, `<C-g>u` 1means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -779,4 +800,9 @@ vnoremap <silent> # :<C-U>
 filetype plugin on
 autocmd FileType javascript setlocal shiftwidth=2 stop=2
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
+" Show quotes in json
+autocmd Filetype json
+  \ let g:indentLine_setConceal = 0 |
+  \ let g:vim_json_syntax_conceal = 0
+" Auotformat tf file with <leader>fm
+autocmd Filetype terraform nmap <leader>fm :TerraformFmt<CR>

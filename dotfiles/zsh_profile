@@ -5,6 +5,12 @@ alias useNode='nvm install `node -p -e require("./package").engines.node`'
 alias update="source ~/.zshrc"
 alias l='colorls --group-directories-first --almost-all --light'
 alias ll='colorls --group-directories-first --almost-all --long --light' # detailed list view
+# cd aliases
+alias cd-moz='cd ~/Projects/moz/'
+alias cd-aws='cd ~/Projects/moz/aws-user-services'
+alias cd-nexus='cd ~/Projects/moz/nexus'
+alias cd-leeloo='cd ~/Projects/moz/leeloo'
+
 
 # Default ENVs
 export AWS_REGION=us-east-1

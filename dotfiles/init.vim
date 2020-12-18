@@ -89,6 +89,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'godlygeek/tabular'
 " Movement with camelCase & snake_case words
 Plug 'bkad/CamelCaseMotion'
+" PlantUML Syntax
+Plug 'aklt/plantuml-syntax'
 " cSpell:enable
 call plug#end()
 
@@ -574,7 +576,7 @@ tnoremap <F7> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 "
 " Open commands
 nnoremap <C-p> :FZF<CR>
-" nnoremap ,b :Buffers<CR>
+nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>ff :Ag<CR>
 
 command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})

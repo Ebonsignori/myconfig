@@ -62,6 +62,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Then run `python3 -m pip install --user --upgrade pynvim`
 - [pip3](https://www.educative.io/edpresso/installing-pip3-in-ubuntu)
   - Then run `pip3 install neovim-remote`
+- [jq](https://stedolan.github.io/jq/)
 
 ## OS Steps
 

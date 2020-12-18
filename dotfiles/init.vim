@@ -808,3 +808,5 @@ autocmd Filetype json
   \ let g:vim_json_syntax_conceal = 0
 " Auotformat tf file with <leader>fm
 autocmd Filetype terraform nmap <leader>fm :TerraformFmt<CR>
+" Autoformat .json file with <leader>fm 
+autocmd Filetype json nmap <leader>fm :%!jq<CR>

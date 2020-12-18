@@ -713,8 +713,10 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>af  <Plug>(coc-fix-current)
+" Apply AutoFix to problem on the current selection.
+vmap <leader>af  <Plug>(coc-fix-current)
+" Apply AutoFormat on file
+nmap <leader>af <Esc>:call CocAction('runCommand', 'eslint.executeAutofix')<CR>
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.

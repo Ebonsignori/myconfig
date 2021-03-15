@@ -5,3 +5,19 @@
 	excludesfile = /Users/evanbonsignori/.gitignore_global
 [alias]
   renameTag = "!sh -c 'set -e;git tag $2 $1; git tag -d $1;git push origin :refs/tags/$1;git push --tags' -"
+	co = checkout
+	br = branch
+	ci = commit -m
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	ph = push
+	pl = pull
+	ll = log --oneline
+[merge]
+	tool = nvim
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+

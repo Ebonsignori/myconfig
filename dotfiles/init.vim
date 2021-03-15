@@ -91,7 +91,11 @@ Plug 'godlygeek/tabular'
 Plug 'bkad/CamelCaseMotion'
 " PlantUML Syntax
 Plug 'aklt/plantuml-syntax'
+" JSX highlighting and tab
+Plug 'maxmellon/vim-jsx-pretty'
 " cSpell:enable
+" Coffeescript
+Plug 'kchmck/vim-coffee-script'
 call plug#end()
 
 "
@@ -174,6 +178,11 @@ endif
 inoremap <Space> <Space><C-g>u
 " Mouse
 set mouse=n
+" Smart case searching
+set ignorecase
+set smartcase
+" Don't hide quotes and symbols
+set conceallevel=0
 
 "
 " Custom keybindings
@@ -212,6 +221,8 @@ inoremap <C-h> <Esc><C-w>h
 inoremap <C-j> <Esc><C-w>j
 inoremap <C-k> <Esc><C-w>k
 inoremap <C-l> <Esc><C-w>l
+" Vertical split with C-w v, horiztonal split with C-w z
+nnoremap <C-w>z :split<CR>
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -377,6 +388,9 @@ endfunction
 command! -range=% GremoveConflictMarkers <line1>,<line2>call RemoveConflictMarkers()
 nnoremap <leader>gb :GremoveConflictMarkers<CR>
 xnoremap <leader>gb :'<,'>GremoveConflictMarkers<CR>
+" Git diff on current file
+nnoremap <leader>gd :Gdiff :0<CR>
+nnoremap <leader>gdm :Gdiff master<CR>
 
 "
 " CamelCaseMotion config

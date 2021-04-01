@@ -1,3 +1,4 @@
+# Bump package.json version to x.y.z on new release-x.y.z branch, commit, and push it
 versionBumpFunc() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   if [[ "$CURRENT_BRANCH" != "master" && "$CURRENT_BRANCH" != "main" ]]; then
@@ -13,11 +14,11 @@ versionBumpFunc() {
     return 1
   fi
   echo "Bumping version to $1"
-  git pl
-  git co -b release-$1
+  git pull
+  git checkout -b release-$1
   npm version --no-git-tag-version $1
-  git ad
-  git ci "bump version to $1"
+  git add .
+  git commit -m "bump version to $1"
   git upstream
 }
 

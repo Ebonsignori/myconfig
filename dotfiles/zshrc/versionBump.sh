@@ -18,6 +18,7 @@ versionBumpFunc() {
   npm version --no-git-tag-version $1
   git ad
   git ci "bump version to $1"
+  git upstream
 }
 
 alias versionBump='versionBumpFunc'

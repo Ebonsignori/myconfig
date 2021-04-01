@@ -96,6 +96,8 @@ Plug 'maxmellon/vim-jsx-pretty'
 " cSpell:enable
 " Coffeescript
 Plug 'kchmck/vim-coffee-script'
+" IDE-like search all
+Plug 'dyng/ctrlsf.vim'
 call plug#end()
 
 "
@@ -613,6 +615,11 @@ if has("nvim")
   au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
   " au FileType fzf tunmap <buffer> <Esc>
 endif
+
+" ctrlsh search config
+let g:ctrlsf_confirm_save = 0
+nmap <leader>fa <Plug>CtrlSFPrompt
+vmap <leader>fa <Plug>CtrlSFVwordPath
 
 "
 " NERDCommenter config

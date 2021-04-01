@@ -25,7 +25,7 @@ TMUX_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.tmux.conf
 TMUX_CONFIG_PATH=~/.tmux.conf
 GLOBAL_GITCONFIG_PATH=~/.gitconfig
 GLOBAL_GITCONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.gitconfig
-ZSH_PROFILE_PROJECT_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/zsh_profile
+ZSHRC_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/main.sh
 VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN=$MY_CONFIG_PROJECT_DIR/dotfiles/nerdtree_mappings.vim
 VIM_NERDTREE_PLUGIN_CONFIG_PATH=~/.vim/nerdtree_plugin/
 VIM_NERDTREE_PLUGIN_CONFIG_FILE=$VIM_NERDTREE_PLUGIN_CONFIG_PATH/mymapping.vim
@@ -83,7 +83,7 @@ main() {
   source $GIT_PROMPT_PATH
   if [ -n "$ZSH_VERSION" ]; then
     # Source this to act as a sort of .bash_profile for zsh in this project
-    source $ZSH_PROFILE_PROJECT_PATH
+    source $ZSHRC_PATH
     # Uncomment to enable zsh auto-complete
     # source $ZSH_AUTOCOMPLETE_FILE
   fi

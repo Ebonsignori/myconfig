@@ -93,6 +93,13 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Add shortcut to start Finder: `Ctrl + Shift + Alt + F`
 - Add shortcut to start Term: `Ctrl + Shift + Alt + T`
 - Change finder settings
+- Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
+  - Add 3-column middle layout
+  - Turn on "Mouse follows focused windows" option 
+  - TODO: Check if `.amethyst` dotfile support has improved
+- Install [Vimmac](https://vimacapp.com/)
+  - Disable scroll hotkey that conflicts with Amethyst
+
 
 ### Linux (Gnome)
 

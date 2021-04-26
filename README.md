@@ -94,9 +94,17 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Add shortcut to start Term: `Ctrl + Shift + Alt + T`
 - Change finder settings
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
-  - Add 3-column middle layout
+  - TODO: Check if `.amethyst` dotfile support has improved. If it has, move instructions to dotfile
   - Turn on "Mouse follows focused windows" option 
-  - TODO: Check if `.amethyst` dotfile support has improved
+  - Set layouts in this order: `Column`, `3Column Middle`, `Fullscreen`, `Tall`
+  - Shortcut <leader-ctrl>a,s,d,f to set layout in order respective to above order
+  - Shortcut <leader>q-r to jump to screen
+  - Shortcut <leader-ctrl>q-r to throw window to screen
+  - Shortcut <leader>enter to switch main window
+  - Shortcut <leader>j,k to switch focused window
+  - Shortcut <leader>h,l to resize focused window
+  - Shortcut <leader>t to toggle tiling on focused window (+ full screen layout to easily full-screen window)
+  - Shortcut <leader-ctrl>z Relaunch Amethyst (fix layouts)
 - Install [Vimmac](https://vimacapp.com/)
   - Disable scroll hotkey that conflicts with Amethyst
 

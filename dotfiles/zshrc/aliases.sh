@@ -24,7 +24,7 @@ alias cd-pylon='cd ~/Projects/moz/pylon'
 alias cd-mrb='cd ~/Projects/moz/mr-business'
 alias cd-pg='cd ~/Projects/moz/payment-gateway'
 alias cd-lf='cd ~/Projects/moz/littlefinger'
-alias cd-gdpr='cd ~/Projects/moz/gdpr_automation'
+alias cd-gdpr='cd ~/Projects/moz/gdpr-automation'
 
 # Git
 alias vdiff='git difftool'
@@ -33,4 +33,6 @@ alias gcom='git checkout master'
 # Install and use package.json version via nvm
 alias useNode='nvm install `node -p -e require("./package").engines.node`'
 
+# Docker
+alias dup='docker-compose up'
 

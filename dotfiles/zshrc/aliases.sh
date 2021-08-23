@@ -8,23 +8,10 @@ alias ll='colorls --group-directories-first --almost-all --long --light' # detai
 # Navigation aliases
 alias cd-myconfig='cd ~/Projects/myconfig'
 alias cd-pt='cd ~/Projects/pitch-trainer-midi'
-# moz
-alias cd-moz='cd ~/Projects/moz/'
-alias cd-aws='cd ~/Projects/moz/aws-user-services'
-alias cd-nexus='cd ~/Projects/moz/nexus'
-alias cd-leeloo='cd ~/Projects/moz/leeloo'
-alias cd-observer='cd ~/Projects/moz/observer'
-alias cd-eh='cd ~/Projects/moz/event-horizon'
-alias cd-utopias='cd ~/Projects/moz/utopias'
-alias cd-magichat='cd ~/Projects/moz/magichat'
-alias cd-hobgoblin='cd ~/Projects/moz/hobgoblin'
-alias cd-arbiter='cd ~/Projects/moz/arbiter'
-alias cd-ecs='cd ~/Projects/moz/ecs-tools'
-alias cd-pylon='cd ~/Projects/moz/pylon'
-alias cd-mrb='cd ~/Projects/moz/mr-business'
-alias cd-pg='cd ~/Projects/moz/payment-gateway'
-alias cd-lf='cd ~/Projects/moz/littlefinger'
-alias cd-gdpr='cd ~/Projects/moz/gdpr-automation'
+# github
+alias cd-booster-hww='cd ~/Projects/github/how-we-work-booster-pack'
+alias cd-testing-hww='cd ~/Projects/github/how-we-work-booster-pack-testing'
+alias cd-ebonsignori-hww='cd ~/Projects/github/how-we-work-booster-pack-testing-ebonsignori'
 
 # Git
 alias vdiff='git difftool'

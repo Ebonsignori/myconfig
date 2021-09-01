@@ -84,6 +84,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 ### Mac OS
 
 - In Preferences -> keyboard -> modifier keys -> Set Caps Lock to Ctrl
+- In Preferences -> mission control -> uncheck "Automatically rearrange Spaces based on most recent use"
 - Install iTerm2 
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
@@ -134,6 +135,17 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Use Mac San Francisco [Fonts](https://www.gnome-look.org/p/1213208/)
 - Add CopyQ, Albert, and Stretchly to Startup Applications via Gnome Tweak Tool
   
+## System
+
+For any hardware setup steps
+
+### Keyboard
+
+[Online Ergodox Layout](https://configure.zsa.io/ergodox-ez/layouts/VYRM4/latest/0)
+
+[Archived Layout if zsa goes offline](./system/ergodox_layout.hex)
+
+
 ## Manual Backup / Restore
 
 If on new setup, copy directories below per instructions, otherwise to backup directories run `sh backup.sh`.

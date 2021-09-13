@@ -6,6 +6,7 @@ autoload -U add-zsh-hook
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/setTerminalTitle.sh
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/useDotNvmVersion.sh
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/nvrVimSplits.sh
+. $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/updateHww.sh
 
 
 # Only load zsh syntax highlighting once

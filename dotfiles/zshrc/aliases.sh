@@ -9,9 +9,9 @@ alias ll='colorls --group-directories-first --almost-all --long --light' # detai
 alias cd-myconfig='cd ~/Projects/myconfig'
 alias cd-pt='cd ~/Projects/pitch-trainer-midi'
 # github
-alias cd-booster-hww='cd ~/Projects/github/how-we-work-booster-pack'
-alias cd-testing-hww='cd ~/Projects/github/how-we-work-booster-pack-testing'
-alias cd-ebonsignori-hww='cd ~/Projects/github/how-we-work-booster-pack-testing-ebonsignori'
+alias cd-booster='cd ~/Projects/github/how-we-work-booster-pack'
+alias cd-booster-testing='cd ~/Projects/github/how-we-work-booster-pack-testing'
+alias cd-booster-ebonsignori='cd ~/Projects/github/how-we-work-booster-pack-testing-ebonsignori'
 
 # Git
 alias vdiff='git difftool'

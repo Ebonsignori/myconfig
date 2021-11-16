@@ -39,7 +39,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-smartf', 'coc-snippets', 'coc-pairs', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker', 'coc-yaml', 'coc-actions']
+let g:coc_global_extensions = ['coc-smartf', 'coc-snippets', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-highlight', 'coc-sh', 'coc-spell-checker', 'coc-yaml', 'coc-actions']
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/nerdcommenter'
@@ -98,6 +98,10 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'kchmck/vim-coffee-script'
 " IDE-like search all
 Plug 'dyng/ctrlsf.vim'
+" Mustache support
+Plug 'mustache/vim-mustache-handlebars'
+" Styled components syntax highlighting 
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
 
 "
@@ -364,6 +368,29 @@ nnoremap <leader>t :call CycleTheme()<CR>
 " Set default theme
 call CycleTheme()
 
+" Clear inactive buffers
+function! DeleteInactiveBufs()
+    "From tabpagebuflist() help, get a list of all buffers in all tabs
+    let tablist = []
+    for i in range(tabpagenr('$'))
+        call extend(tablist, tabpagebuflist(i + 1))
+    endfor
+
+    "Below originally inspired by Hara Krishna Dara and Keith Roberts
+    "http://tech.groups.yahoo.com/group/vim/message/56425
+    let nWipeouts = 0
+    for i in range(1, bufnr('$'))
+        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
+            silent exec 'bwipeout' i
+            let nWipeouts = nWipeouts + 1
+        endif
+    endfor
+    echomsg nWipeouts . ' buffer(s) wiped out'
+endfunction
+command! Bdi :call DeleteInactiveBufs()
+nnoremap <leader>db :call DeleteInactiveBufs()<CR>
+
 " Rainbow parens plugin
 let g:rainbow_active = 1
 
@@ -392,7 +419,7 @@ nnoremap <leader>gb :GremoveConflictMarkers<CR>
 xnoremap <leader>gb :'<,'>GremoveConflictMarkers<CR>
 " Git diff on current file
 nnoremap <leader>gd :Gdiff :0<CR>
-nnoremap <leader>gdm :Gdiff master<CR>
+nnoremap <leader>gdm :Gdiff main<CR>
 
 "
 " CamelCaseMotion config

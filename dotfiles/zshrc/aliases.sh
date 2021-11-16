@@ -18,7 +18,7 @@ alias cd-reports-ebonsignori='cd ~/Projects/github/how-we-work-memex-reports-gen
 
 # Git
 alias vdiff='git difftool'
-alias gcom='git checkout master'
+alias gcom='git checkout main'
 
 # Install and use package.json version via nvm
 alias useNode='nvm install `node -p -e require("./package").engines.node`'

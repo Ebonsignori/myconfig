@@ -9,17 +9,24 @@ updateHwwFunc() {
     echo "You have uncomitted changes!"  
     return 1
   fi
+  GITHUB_DIR=".github"
+  WORKFLOWS_DIR="$GITHUB_DIR/workflows"
+  ISSUE_COMMENT_TEMPLATE_DIR="$GITHUB_DIR/ISSUE_COMMENT_TEMPLATE"
+  BOOSTER_PACK_DIR="$GITHUB_DIR/hww-booster-pack-updates"
+
   git checkout ${CURRENT_BRANCH} && git pull && git checkout hww-booster-pack-updater && git pull
-  mkdir -p .github/ISSUE_COMMENT_TEMPLATE # May not exist if onboarding
+  mkdir -p $WORKFLOWS_DIR
+  mkdir -p $ISSUE_COMMENT_TEMPLATE_DIR
+
   # Delete all existing workflows beginning with hww-, then replace with updated versions 
-  rm .github/workflows/hwwmemexreports-* .github/workflows/hww-* .github/ISSUE_COMMENT_TEMPLATE/hww-*
-  mv .github/hww-booster-pack-updates/workflows/* .github/workflows/
-  mv .github/hww-booster-pack-updates/ISSUE_COMMENT_TEMPLATE/* .github/ISSUE_COMMENT_TEMPLATE/
+  rm $WORKFLOWS_DIR/hwwmemexreports-* $WORKFLOWS_DIR/hww-* $ISSUE_COMMENT_TEMPLATE_DIR/hww-*
+  mv $BOOSTER_PACK_DIR/workflows/* $WORKFLOWS_DIR/
+  mv $BOOSTER_PACK_DIR/ISSUE_COMMENT_TEMPLATE/* $ISSUE_COMMENT_TEMPLATE_DIR/
+
   # Add, commit, and push
   git add --all && git commit -m "Accept booster pack updates" && git push 
-  git checkout ${CURRENT_BRANCH}
-  git merge hww-booster-pack-updater #Remove this line if you want to review the changes before merging them
-  git push
+  # Checkout main branch
+  git checkout ${CURRENT_BRANCH} && git merge hww-booster-pack-updater && git push
   git branch -D hww-booster-pack-updater
 }
 

@@ -86,7 +86,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
 - Install [Brew](https://brew.sh/)
-- Download a clipboard manager, like [CopyClip](https://fiplab.com/apps/copyclip-for-mac).
+- Download [CopyQ](https://github.com/hluk/CopyQ/releases)
 - Change finder preference and turn on view -> bars 
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
   - TODO: Check if `.amethyst` dotfile support has improved. If it has, move instructions to dotfile

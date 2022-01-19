@@ -84,6 +84,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 ### Mac OS
 
 - In Preferences -> keyboard -> modifier keys -> Set Caps Lock to Ctrl
+- In Preferences -> Mouse -> Toggle "Natural" 🤮 scroll
 - In Preferences -> mission control -> uncheck "Automatically rearrange Spaces based on most recent use"
 - Install iTerm2 
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)

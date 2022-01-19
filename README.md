@@ -74,12 +74,8 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Copy SYNC files from Google Drive to OS.
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font and set it for your terminal. Follow instructions for Linux or Mac. I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation). You can download the fonts directly from [here](https://www.nerdfonts.com/font-downloads).
 - Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
-- Install [Insomnia Core REST Client](https://insomnia.rest/)
-- Install [DBeaver](https://dbeaver.io/)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
-- Install Doc explorer, [Zeal](https://zealdocs.org/)
 - Install Slack, Discord, and Spotify with package mangager or in app store.
-- Install [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl) and set up zsh autocompletions for it
 
 ### Mac OS
 
@@ -90,11 +86,8 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
 - Install [Brew](https://brew.sh/)
-- Redeem [BetterSnapTool](https://folivora.ai/bettersnaptool) from App Store.
 - Download a clipboard manager, like [CopyClip](https://fiplab.com/apps/copyclip-for-mac).
-- Add shortcut to start Finder: `Ctrl + Shift + Alt + F`
-- Add shortcut to start Term: `Ctrl + Shift + Alt + T`
-- Change finder settings
+- Change finder preference and turn on view -> bars 
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
   - TODO: Check if `.amethyst` dotfile support has improved. If it has, move instructions to dotfile
   - Turn on "Mouse follows focused windows" option 
@@ -107,9 +100,6 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Shortcut <leader>h,l to resize focused window
   - Shortcut <leader>t to toggle tiling on focused window (+ full screen layout to easily full-screen window)
   - Shortcut <leader-ctrl>z Relaunch Amethyst (fix layouts)
-- Install [Vimmac](https://vimacapp.com/)
-  - Disable scroll hotkey that conflicts with Amethyst
-
 
 ### Linux (Gnome)
 

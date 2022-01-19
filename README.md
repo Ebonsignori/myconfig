@@ -33,6 +33,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Then run:
     - `cd /usr/local/share/zsh`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
+    - or on Mac, `brew install zsh-syntax-highlighting`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
      - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
      - You may need to run `sudo apt-get install ruby-dev` and `sudo apt-get install ubuntu-dev-tools` on Ubuntu

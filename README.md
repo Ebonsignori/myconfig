@@ -83,10 +83,12 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - In Preferences -> keyboard -> modifier keys -> Set Caps Lock to Ctrl
 - In Preferences -> Mouse -> Toggle "Natural" 🤮 scroll
 - In Preferences -> mission control -> uncheck "Automatically rearrange Spaces based on most recent use"
+- Install [Brew](https://brew.sh/)
+- Install Hack font `brew tap homebrew/cask-fonts`, `brew install --cask font-hack-nerd-font`
+- Install ruby, `brew install ruby` and colorls, `gem install colorls --user-install`. May need to [add gem path to .zshrc](https://stackoverflow.com/questions/53979362/you-dont-have-path-in-your-path-gem-executables-will-not-run-while-using)
 - Install iTerm2 
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
-- Install [Brew](https://brew.sh/)
 - Download [CopyQ](https://github.com/hluk/CopyQ/releases)
 - Change finder preference and turn on view -> bars 
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`

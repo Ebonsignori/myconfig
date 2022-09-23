@@ -102,6 +102,10 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'mustache/vim-mustache-handlebars'
 " Styled components syntax highlighting 
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 call plug#end()
 
 "
@@ -350,6 +354,8 @@ function! CycleTheme()
     hi DiffAdd gui=NONE guibg=#ACF2BD guifg=black
     hi DiffText guibg=#ACF2BD guifg=black
     hi DiffDelete guibg=#FDEEF0 guifg=#F8B8C0
+    " Error message box color
+    highlight CocErrorFloat ctermfg=black guifg=black
   elseif (g:current_theme_num == 1)
     " onedark theme
     colorscheme onedark
@@ -450,11 +456,6 @@ let g:auto_save_silent = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged", "FocusLost"]
 " Set vim setting for autosave too
 set autowriteall
-
-"
-" Yankstack
-"
-nnoremap <leader>p :Yanks<CR>
 
 "
 " (DEPRECATED: for airline) Powerline
@@ -622,10 +623,11 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>ff :Ag<CR>
 
-command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
+command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', , 'options': '-q '.shellescape(<q-args>.' ')})
 command! -bang -nargs=* FzfAg                              
   \ call fzf#vim#ag(<q-args>,
   \                 '--ignore "node_modules"',
+  \                 '--ignore "content/*"',
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
@@ -661,8 +663,8 @@ let g:NERDTrimTrailingWhitespace = 1
 " Keybindings
 let g:NERDCreateDefaultMappings = 0
 " inoremap <leader>c <C-o>:call NERDComment(0,"toggle")<C-m>
-vnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
-nnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
+vnoremap <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
+nnoremap <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
 
 "
 " vim-terraform config

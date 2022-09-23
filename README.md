@@ -31,7 +31,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - [zsh shell](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
   - NOTE: You may need to `reboot` system for ZSH shell default to update.
   - Then run:
-    - `cd /usr/local/share/zsh`
+    - `cd ~/Projects/myconfig`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - or on Mac, `brew install zsh-syntax-highlighting`
   - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors

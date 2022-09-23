@@ -16,3 +16,5 @@ SPACESHIP_EXIT_CODE_SHOW=true
 SPACESHIP_VI_MODE_COLOR=grey
 # spaceship_vi_mode_enable
 
+# Add kubectl autocomplete
+# source <(kubectl completion zsh)

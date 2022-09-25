@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# If any command fails, exit immediately with that command's exit status
+set -eo pipefail
+
+echo "Checking if FATAL is present in pre-commit hook" 
+
+# If string "FATAL:" is present in changed files, exit with error
+if git diff --cached --name-only | xargs grep -q "FATAL:"; then
+  echo "FATAL: found in pre-commit hook. Exiting with error"
+  exit 1
+fi

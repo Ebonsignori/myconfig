@@ -11,6 +11,10 @@ MY_CONFIG_DIR=~/.myconfig
 MY_BIN_DIR=$MY_CONFIG_DIR/bin
 NVIM_CONFIG_DIR=~/.config/nvim
 
+# Git templates
+GIT_TEMPLATES_DIR=~/.git-templates
+MY_GIT_TEMPLATES_DIR=$MY_CONFIG_PROJECT_DIR/dotfiles/.git-templates
+
 # Terminal files
 GIT_COMPLETE_PATH=$MY_BIN_DIR/.git-completion.bash
 GIT_COMPLETE_PATH_ZSH=$MY_BIN_DIR/.git-completion.zsh
@@ -79,6 +83,9 @@ main() {
   create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
   create_replace_dotfile $VIM_NERDTREE_PLUGIN_CONFIG_FILE $VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN
 
+  # Copy over directories
+  create_replace_directory $GIT_TEMPLATES_DIR $MY_GIT_TEMPLATES_DIR
+
   # Source plugins
   source $GIT_PROMPT_PATH
   if [ -n "$ZSH_VERSION" ]; then
@@ -95,43 +102,27 @@ main() {
   echo 'Initalized .myconfig'
 }
 
+# Create all directories
 create_directories() {
-	create_directory $MY_CONFIG_DIR
-	create_dir_status=$?
-	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$MY_CONFIG_DIR'"
-		 exit $create_dir_status 
+  for dir in $MY_CONFIG_DIR $MY_BIN_DIR $NVIM_CONFIG_DIR $VIM_NERDTREE_PLUGIN_CONFIG_PATH $MY_CONFIG_DIR/.vim_undo_history; do
+    create_directory $dir
+  done
+}
+
+create_directory() {
+	if [ $# -eq 0 ]; then
+		echo "Directory argument required"
+    echo "Failed to create '$1'"
+    exit $FALSE
 	fi
   
-	create_directory $MY_BIN_DIR
-	create_dir_status=$?
-	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$MY_BIN_DIR'"
-		 exit $crate_dir_status 
-	fi
-
-	create_directory $NVIM_CONFIG_DIR
-	create_dir_status=$?
-	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$NVIM_CONFIG_DIR'"
-		 exit $crate_dir_status 
-	fi
-  
-  
-	create_directory $VIM_NERDTREE_PLUGIN_CONFIG_PATH
-	create_dir_status=$?
-	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$VIM_NERDTREE_PLUGIN_CONFIG'"
-		 exit $crate_dir_status 
-	fi
-
-  create_directory $MY_CONFIG_DIR/.vim_undo_history
-	create_dir_status=$?
-	if ! $(exit $create_dir_status); then
-	   echo "Failed to create '$MY_CONFIG_DIR/.vim_undo_history'"
-		 exit $crate_dir_status 
-	fi
-
+	if [ -d $1 ]; then
+		return 0
+  else
+		mkdir -p $1
+		echo "'$1' directory created"
+		return 0
+  fi
 }
 
 check_prereqs() {
@@ -154,21 +145,6 @@ check_prereq() {
   if [ $PRE_REQ_INSTALLED -ne 0 ]; then
     echo "Missing prereq: $2. Please install $2 manually via package manager."
     exit 1
-  fi
-}
-
-create_directory() {
-	if [ $# -eq 0 ]; then
-		echo "Directory argument required"
-		return $FALSE
-	fi
-  
-	if [ -d $1 ]; then
-		return 0
-  else
-		mkdir -p $1
-		echo "'$1' directory created"
-		return 0
   fi
 }
 
@@ -196,10 +172,43 @@ create_replace_dotfile() {
   elif [[ -f $1 && $cmpare_status -ne 0 ]]; then
     echo "Updates for '$1' detected"
     if [ -n $MY_CONFIG_AUTO_OVERWRITE ]; then
-      echo "Auto overwriting '$1' with changes."
+      echo "Auto overwriting '$1' with changes from '$2'"
       cp $2 $1 
     else
       cp -i $2 $1 
+    fi
+  fi
+}
+
+# Function that creates or replaces a directory with another directory
+# $1 = destination directory
+# $2 = origin path of directory to copy over
+create_replace_directory() {
+  if [ $# -lt 2 ]; then
+    echo "Directory destination and origin path arguments required"
+    return $FALSE
+  fi
+
+  # When copying over for the first time, just copy over the directory
+  if [ ! -d $1 ]; then
+    echo "Creating directory '$1'"
+    mkdir -p $1
+    cp -r $2/* $1 
+    return 0
+  fi
+
+  # Check if the directories are the same and if they aren't then replace the destination directory with the origin directory
+  directory_diff=$(diff -qr $2 $1 -x ".DS_Store")
+
+  # If directory_diff is not empty
+  if [ -n "$directory_diff" ]; then
+    echo "Updates for '$1' detected"
+    echo "This could mean that your local directory is out of sync with myconfig. Update myconfig if this is the case."
+    if [ -n $MY_CONFIG_AUTO_OVERWRITE ]; then
+      echo "Auto overwriting '$1' with changes from '$2'"
+      cp -rv $2/* $1 
+    else
+      cp -ir $2/* $1 
     fi
   fi
 }

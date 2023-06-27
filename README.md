@@ -69,6 +69,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
 - Install Slack and Spotify
+- Install offline / no-sync [Atuin](https://github.com/ellie/atuin#offline-only-no-sync)
 
 ### Mac OS
 

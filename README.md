@@ -66,6 +66,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Sign into PW Manager
   - Set downloads path to `~/Downloads/Web`
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font and set it for your terminal. Follow instructions for Linux or Mac. I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation). You can download the fonts directly from [here](https://www.nerdfonts.com/font-downloads).
+- Install VSCode: `brew install --cask visual-studio-code`
 - Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
 - Install Slack and Spotify

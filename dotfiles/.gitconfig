@@ -19,9 +19,9 @@
 	ll = log --oneline
   plMaster = pull origin/master
 [merge]
-	tool = nvim
+	tool = vscode
 [diff]
-	tool = nvimdiff
+	tool = vscode
 [difftool]
 	prompt = false
 [pull]

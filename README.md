@@ -46,7 +46,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
      export PATH="$HOME/.rbenv/bin:$PATH"
      eval "$(rbenv init -)"
      ```
-- [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+- [neovim](https://formulae.brew.sh/formula/neovim)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
 - [asdf](https://asdf-vm.com/guide/getting-started.html)
   - `brew install asdf`
@@ -59,15 +59,9 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`
-  - `npm install -g spaceship-prompt`
 - [python2](https://www.python.org/download/releases/2.0/)
-  - Install [pip with python2](https://pip.pypa.io/en/stable/installing/)
-  - Then run `python2 -m pip install --user --upgrade pynvim`
 - [python3](https://www.python.org/downloads/)
-  - Install [pip w python3](https://pip.pypa.io/en/stable/installing/)
-  - Then run `python3 -m pip install --user --upgrade pynvim`
 - [pip3](https://www.educative.io/edpresso/installing-pip3-in-ubuntu)
-  - Then run `pip3 install neovim-remote`
 - [jq](https://stedolan.github.io/jq/)
 
 ## OS Steps
@@ -75,13 +69,13 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Install [Chrome](https://www.google.com/chrome/)
   - Set up Sync
   - Sign into PW Manager
-  - Sign into Raindrop.io
   - Set downloads path to `~/Downloads/Web`
-- Copy SYNC files from Google Drive to OS.
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font and set it for your terminal. Follow instructions for Linux or Mac. I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation). You can download the fonts directly from [here](https://www.nerdfonts.com/font-downloads).
+- Install VSCode: `brew install --cask visual-studio-code`
 - Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
-- Install Slack, Discord, and Spotify with package mangager or in app store.
+- Install Slack and Spotify
+- Install offline / no-sync [Atuin](https://github.com/ellie/atuin#offline-only-no-sync)
 
 ### Mac OS
 
@@ -94,7 +88,8 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Install iTerm2 
   - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
   - Go to preferences -> keyboard and check `Use Option as Meta Key`.
-- Download [CopyQ](https://github.com/hluk/CopyQ/releases)
+- Download [Spaceship prompt](https://formulae.brew.sh/formula/spaceship)
+- Download [CopyQ](https://formulae.brew.sh/cask/copyq)
 - Change finder preference and turn on view -> bars 
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
   - TODO: Check if `.amethyst` dotfile support has improved. If it has, move instructions to dotfile

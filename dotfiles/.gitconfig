@@ -2,12 +2,14 @@
 	email = evanabonsignori@gmail.com 
 	name = Evan Bonsignori
 [core]
+  editor = "code --wait"
 	excludesfile = /Users/evanbonsignori/.gitignore_global
 [alias]
   renameTag = "!sh -c 'set -e;git tag $2 $1; git tag -d $1;git push origin :refs/tags/$1;git push --tags' -"
 	upstream = !git push -u origin HEAD
   ad = "add -A"
 	co = checkout
+	co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   com = "checkout master"
 	br = branch
 	ci = "commit -m"
@@ -19,9 +21,9 @@
 	ll = log --oneline
   plMaster = pull origin/master
 [merge]
-	tool = nvim
+	tool = vim
 [diff]
-	tool = nvimdiff
+	tool = vimdiff
 [difftool]
 	prompt = false
 [pull]

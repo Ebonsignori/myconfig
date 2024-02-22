@@ -499,15 +499,6 @@ endfunction
 set tabline=%!Tabline()
 
 "
-" neovim-remote config
-"
-" We use nvr to open nvim inside an nvim terminal. e.g. git commit msg 
-if has('nvim')
-  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
-  autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
-endif
-
-"
 " Nerdtree Config
 "
 " Don't load built-in browser, netrw

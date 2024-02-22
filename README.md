@@ -48,9 +48,14 @@ export MY_CONFIG_AUTO_OVERWRITE=false
      ```
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
   - Install [Ag](https://github.com/ggreer/the_silver_searcher)
-- [nvm](https://github.com/nvm-sh/nvm)
-  - For nvm install make sure to pipe to zsh shell, e.g. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh`
-  - `nvm install <node version>`
+- [asdf](https://asdf-vm.com/guide/getting-started.html)
+  - `brew install asdf`
+  - Add to zshrc, `echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc`
+  - Install nodejs plugin:
+  - 1. `asdf plugin add nodejs`
+  - 2. `asdf install nodejs latest`
+  - 3. `asdf asdf global nodejs latest`
+  - 4. Repeat steps 1-3 for `golang` and any other needed languages
 - [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
   - Then run `npm install -g neovim`
   - `npm i -g bash-language-server`

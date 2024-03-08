@@ -4,7 +4,7 @@ autoload -U add-zsh-hook
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/aliases.sh
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/versionBump.sh
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/setTerminalTitle.sh
-. $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/useDotNvmVersion.sh
+# . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/useDotNvmVersion.sh
 . $MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/vimMode.sh
 
 # Only load zsh syntax highlighting once

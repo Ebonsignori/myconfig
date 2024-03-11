@@ -2,8 +2,8 @@
 alias vi='nvim'
 alias v='nvim'
 alias update="source ~/.zshrc"
-alias l='colorls --group-directories-first --almost-all --light'
-alias ll='colorls --group-directories-first --almost-all --long --light' # detailed list view
+alias l='lsd'
+alias ll='lsd -al'
 
 # Navigation aliases
 alias cd-myconfig='cd ~/Projects/myconfig'

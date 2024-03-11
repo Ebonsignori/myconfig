@@ -34,20 +34,6 @@ export MY_CONFIG_AUTO_OVERWRITE=false
     - `cd ~/Projects/myconfig`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - or on Mac, `brew install zsh-syntax-highlighting`
-  - Follow [this](https://github.com/athityakumar/colorls#installation) to install folder colors
-     - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
-     - You may need to run `sudo apt-get install ruby-dev` and `sudo apt-get install ubuntu-dev-tools` on Ubuntu
-     - You may need to run `gem install colorls --user-install`
-     - You may need to add the following to your `~/.zshrc`
-     ```
-     path+=(
-        $(ruby -e 'puts File.join(Gem.user_dir, "bin")')
-     )
-     export PATH="$HOME/.rbenv/bin:$PATH"
-     eval "$(rbenv init -)"
-     ```
-- [neovim](https://formulae.brew.sh/formula/neovim)
-  - Install [Ag](https://github.com/ggreer/the_silver_searcher)
 - [asdf](https://asdf-vm.com/guide/getting-started.html)
   - `brew install asdf`
   - Add to zshrc, `echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc`
@@ -56,13 +42,8 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - 2. `asdf install nodejs latest`
   - 3. `asdf asdf global nodejs latest`
   - 4. Repeat steps 1-3 for `golang` and any other needed languages
-- [npm](https://nodejs.org/en/download/) (should install when you install node via nvm)
-  - Then run `npm install -g neovim`
-  - `npm i -g bash-language-server`
-- [python2](https://www.python.org/download/releases/2.0/)
-- [python3](https://www.python.org/downloads/)
-- [pip3](https://www.educative.io/edpresso/installing-pip3-in-ubuntu)
 - [jq](https://stedolan.github.io/jq/)
+- [lsd](https://github.com/lsd-rs/lsd)
 
 ## OS Steps
 
@@ -71,7 +52,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Sign into PW Manager
   - Set downloads path to `~/Downloads/Web`
 - Install a [nerd-font](https://github.com/ryanoasis/nerd-fonts) font and set it for your terminal. Follow instructions for Linux or Mac. I prefer [Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation). You can download the fonts directly from [here](https://www.nerdfonts.com/font-downloads).
-- Install VSCode: `brew install --cask visual-studio-code`
+- Install VSCode
 - Download [Docker](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/install/). (Can use Docker Desktop to get both on Mac)
 - Install Break Reminder, [Stretchly](https://hovancik.net/stretchly/downloads/)
 - Install Slack and Spotify
@@ -84,10 +65,6 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - In Preferences -> mission control -> uncheck "Automatically rearrange Spaces based on most recent use"
 - Install [Brew](https://brew.sh/)
 - Install Hack font `brew tap homebrew/cask-fonts`, `brew install --cask font-hack-nerd-font`
-- Install ruby, `brew install ruby` and colorls, `gem install colorls --user-install`. May need to [add gem path to .zshrc](https://stackoverflow.com/questions/53979362/you-dont-have-path-in-your-path-gem-executables-will-not-run-while-using)
-- Install iTerm2 
-  - Set theme to the [custom__light_theme](./mac_os/custom_light_theme.json) and set font to [hack](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)
-  - Go to preferences -> keyboard and check `Use Option as Meta Key`.
 - Download [Spaceship prompt](https://formulae.brew.sh/formula/spaceship)
 - Download [CopyQ](https://formulae.brew.sh/cask/copyq)
 - Change finder preference and turn on view -> bars 

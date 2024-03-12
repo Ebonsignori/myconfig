@@ -23,6 +23,8 @@ ZSH_AUTOCOMPLETE_PATH=$MY_BIN_DIR/zsh-autocomplete
 ZSH_AUTOCOMPLETE_FILE=$ZSH_AUTOCOMPLETE_PATH/zsh-autocomplete.plugin.zsh
 
 # Dot files
+AMETHYST_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.amethyst.yml
+AMETHYST_PATH=~/.amethyst.yml
 NVIM_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/init.vim
 NVIM_CONFIG_PATH=~/.config/nvim/init.vim
 TMUX_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.tmux.conf
@@ -82,6 +84,7 @@ main() {
   create_replace_dotfile $TMUX_CONFIG_PATH $TMUX_CONFIG_ORIGIN_PATH
   create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
   create_replace_dotfile $VIM_NERDTREE_PLUGIN_CONFIG_FILE $VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN
+  create_replace_dotfile $AMETHYST_PATH $AMETHYST_ORIGIN_PATH
 
   # Copy over directories
   create_replace_directory $GIT_TEMPLATES_DIR $MY_GIT_TEMPLATES_DIR

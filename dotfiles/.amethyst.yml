@@ -1,0 +1,113 @@
+layouts:
+  - tall
+  - column
+  - fullscreen
+
+mod1:
+  - option
+  - shift
+
+mod2:
+  - control
+  - option
+  - shift
+
+# Select tall layout
+select-tall-layout:
+  mod: mod1
+  key: a
+
+# Select wide layout
+select-wide-layout:
+  mod: mod1
+  key: s
+
+# Select fullscreen layout
+select-fullscreen-layout:
+  mod: mod1
+  key: d
+
+# Select column layout
+select-column-layout:
+  mod: mod1
+  key: f
+
+# Focus the next window in the list going counter-clockwise.
+focus-ccw:
+  mod: mod1
+  key: j
+
+# Focus the next window in the list going clockwise.
+focus-cw:
+  mod: mod1
+  key: k
+
+# Shrink the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
+shrink-main:
+  mod: mod1
+  key: h
+
+# Expand the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
+expand-main:
+  mod: mod1
+  key: l
+
+
+# Unbind focus/throw-screens that use shortcuts for spaces
+focus-screen-1:
+  mod: mod1
+  key: y
+focus-screen-2:
+  mod: mod1
+  key: u
+focus-screen-3:
+  mod: mod1
+  key: i
+focus-screen-4:
+  mod: mod1
+  key: o
+throw-screen-1: 
+  mod: mod2
+  key: y
+throw-screen-2:
+  mod: mod2
+  key: u
+throw-screen-3:
+  mod: mod2
+  key: i
+throw-screen-4:
+  mod: mod2
+  key: o
+
+# Space throws (throw window to screen)
+throw-space-1:
+  mod: mod2
+  key: q
+throw-space-2:
+  mod: mod2
+  key: w
+
+throw-space-3: 
+  mod: mod2
+  key: e
+
+throw-space-4:
+  mod: mod2
+  key: r
+
+# Rerun the current layout's algorithm.
+reevaluate-windows:
+  mod: mod1
+  key: z
+
+# Automatically quit and reopen Amethyst.
+relaunch-amethyst:
+  mod: mod2
+  key: z
+
+# Settings
+follow-space-thrown-windows: true
+mouse-follows-focus: false
+focus-follows-mouse: false
+mouse-swaps-windows: true
+mouse-resize-windows: true

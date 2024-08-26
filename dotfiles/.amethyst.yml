@@ -1,36 +1,31 @@
 layouts:
-  - tall
   - column
   - fullscreen
+  - tall
 
 mod1:
   - option
   - shift
 
 mod2:
-  - control
   - option
   - shift
+  - control
 
 # Select tall layout
 select-tall-layout:
   mod: mod1
-  key: a
-
-# Select wide layout
-select-wide-layout:
-  mod: mod1
-  key: s
+  key: x
 
 # Select fullscreen layout
 select-fullscreen-layout:
   mod: mod1
-  key: d
+  key: v
 
 # Select column layout
 select-column-layout:
   mod: mod1
-  key: f
+  key: c
 
 # Focus the next window in the list going counter-clockwise.
 focus-ccw:
@@ -82,18 +77,16 @@ throw-screen-4:
 # Space throws (throw window to screen)
 throw-space-1:
   mod: mod2
-  key: q
+  key: a
 throw-space-2:
   mod: mod2
-  key: w
-
+  key: s
 throw-space-3: 
   mod: mod2
-  key: e
-
+  key: d
 throw-space-4:
   mod: mod2
-  key: r
+  key: f
 
 # Rerun the current layout's algorithm.
 reevaluate-windows:

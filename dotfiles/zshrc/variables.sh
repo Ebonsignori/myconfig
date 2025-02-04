@@ -18,3 +18,6 @@ SPACESHIP_VI_MODE_COLOR=grey
 
 # Add kubectl autocomplete
 # source <(kubectl completion zsh)
+
+# For github/docs
+export DOCS_NO_AUTO_NPM=true

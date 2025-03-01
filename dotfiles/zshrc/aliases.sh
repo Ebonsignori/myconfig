@@ -4,6 +4,7 @@ alias v='nvim'
 alias update="source ~/.zshrc"
 alias l='lsd'
 alias ll='lsd -al'
+alias ls='lsd'
 
 # Navigation aliases
 alias cd-myconfig='cd ~/Projects/myconfig'

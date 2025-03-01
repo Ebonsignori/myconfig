@@ -15,14 +15,14 @@ We do this by adding the following lines to the end of your `~/.zshrc` or `~/.ba
 ```
 # Load myconfig profile *NOTE:* Place at bottom of .zshrc
 export MY_CONFIG_PROJECT_DIR=~/Projects/myconfig
-export MY_CONFIG_AUTO_OVERWRITE=true 
+export MY_CONFIG_AUTO_OVERWRITE=true
 source $MY_CONFIG_PROJECT_DIR/init.sh
 ```
 
 Optionally you can require confirmation prompts when overriding config files:
 
 ```
-export MY_CONFIG_AUTO_OVERWRITE=false  
+export MY_CONFIG_AUTO_OVERWRITE=false
 ```
 
 ## Prereqs
@@ -34,14 +34,11 @@ export MY_CONFIG_AUTO_OVERWRITE=false
     - `cd ~/Projects/myconfig`
     - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
     - or on Mac, `brew install zsh-syntax-highlighting`
-- [asdf](https://asdf-vm.com/guide/getting-started.html)
-  - `brew install asdf`
-  - Add to zshrc, `echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc`
-  - Install nodejs plugin:
-  - 1. `asdf plugin add nodejs`
-  - 2. `asdf install nodejs latest`
-  - 3. `asdf asdf global nodejs latest`
-  - 4. Repeat steps 1-3 for `golang` and any other needed languages
+- [mise](https://github.com/jdx/mise)
+  - `brew install mise`
+  - `mise use --global node@lts`
+  - `mise use --global go@1`
+  - `mise use --global ruby@3`
 - [jq](https://stedolan.github.io/jq/)
 - [lsd](https://github.com/lsd-rs/lsd)
 
@@ -67,7 +64,7 @@ export MY_CONFIG_AUTO_OVERWRITE=false
 - Install Hack font `brew tap homebrew/cask-fonts`, `brew install --cask font-hack-nerd-font`
 - Download [Spaceship prompt](https://formulae.brew.sh/formula/spaceship)
 - Download [CopyQ](https://formulae.brew.sh/cask/copyq)
-- Change finder preference and turn on view -> bars 
+- Change finder preference and turn on view -> bars
 - Install [Amethyst](https://ianyh.com/amethyst/): `brew install --cask amethyst`
 
 ### Linux (Gnome)
@@ -90,11 +87,11 @@ export MY_CONFIG_AUTO_OVERWRITE=false
   - Set them in Gnome tool then move close btns to the LHS with: `gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:"`
   - Get and use [Mac OS icons](https://www.pling.com/p/1102582/).
   - Install and use [Dash To Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/) (Dash to Doc is more mac like but at time of writing doesn't enable hover previews)
-    - Enable persistent top-bar, opacity, auto-hide, and change non-active window indicators. 
+    - Enable persistent top-bar, opacity, auto-hide, and change non-active window indicators.
   - Install and use [BLYR](https://extensions.gnome.org/extension/1251/blyr/)
   - Use Mac San Francisco [Fonts](https://www.gnome-look.org/p/1213208/)
 - Add CopyQ, Albert, and Stretchly to Startup Applications via Gnome Tweak Tool
-  
+
 ## System
 
 For any hardware setup steps
@@ -105,10 +102,8 @@ For any hardware setup steps
 
 [Archived Layout if zsa goes offline](./system/ergodox_layout.hex)
 
-
 ## Manual Backup / Restore
 
 If on new setup, copy directories below per instructions, otherwise to backup directories run `sh backup.sh`.
 
 - `./dotfiles/coc` to `~/.config/coc`. Only copy snippets folder and mru's. If copying entire folder will need to custom `npm i`. Installing coc via nvim `:PlugInstall` first and then copying over needed files is recommended.
-

@@ -1,6 +1,7 @@
 # Aliases
 alias vi='nvim'
 alias v='nvim'
+alias cl='claude'
 alias update="source ~/.zshrc"
 alias l='lsd'
 alias ll='lsd -al'
@@ -23,4 +24,9 @@ alias useNode='nvm install `node -p -e require("./package").engines.node`'
 
 # Docker
 alias dup='docker-compose up'
+
+# LLM Echo Server - usage: es 8080 or es 8080 "custom message"
+function es {
+  node ~/Projects/myconfig/echo-server/echo-server.mjs "$@"
+}
 

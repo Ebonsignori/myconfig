@@ -143,8 +143,8 @@ check_prereq() {
     return $FALSE
   fi
 
-  eval $1 2>&1 >/dev/null
-  PRE_REQ_INSTALLED=$?
+  eval $1 2>&1 | grep -v "^npm warn" >/dev/null
+  PRE_REQ_INSTALLED=$pipestatus[1]
   if [ $PRE_REQ_INSTALLED -ne 0 ]; then
     echo "Missing prereq: $2. Please install $2 manually via package manager."
     exit 1

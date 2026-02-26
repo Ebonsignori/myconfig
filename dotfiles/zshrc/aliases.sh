@@ -21,6 +21,9 @@ alias gcom='git checkout main'
 # Install and use package.json version via nvm
 alias useNode='nvm install `node -p -e require("./package").engines.node`'
 
+# Crabterm
+alias crab='~/Projects/crabterm/src/crabterm'
+
 # Docker
 alias dup='docker-compose up'
 

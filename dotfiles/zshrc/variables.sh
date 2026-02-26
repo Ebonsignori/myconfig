@@ -5,8 +5,8 @@ export AWS_REGION=us-east-1
 export PATH=~/.bin:$PATH
 
 # Change default editor
-export EDITOR=/usr/local/bin/nvim
-export VISUAL=/usr/local/bin/nvim
+export EDITOR=vim
+export VISUAL=vim
 
 # Make FZF open with last search (useful for vim)
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"

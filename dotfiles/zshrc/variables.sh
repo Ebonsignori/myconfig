@@ -21,3 +21,10 @@ SPACESHIP_VI_MODE_COLOR=grey
 
 # For github/docs
 export DOCS_NO_AUTO_NPM=true
+
+# For Codex CLI via copilot-api proxy
+export COPILOT_API_KEY=dummy
+
+# For Gemini CLI via copilot-api proxy
+export GEMINI_API_KEY=dummy
+export GOOGLE_GEMINI_BASE_URL=http://localhost:4141

@@ -1,7 +1,7 @@
 # Aliases
 alias vi='nvim'
 alias v='nvim'
-alias cl='claude'
+alias cl='vt claude'
 alias update="source ~/.zshrc"
 alias l='lsd'
 alias ll='lsd -al'
@@ -22,11 +22,11 @@ alias gcom='git checkout main'
 # Install and use package.json version via nvm
 alias useNode='nvm install `node -p -e require("./package").engines.node`'
 
-# Crabterm
-alias crab='~/Projects/crabterm/src/crabterm'
-
 # Docker
 alias dup='docker-compose up'
+
+# Slack MCP setup - get token from https://api.slack.com/apps/A01G8NHTM7Y/oauth
+alias smcp='~/.local/bin/slack-mcp-setup'
 
 # LLM Echo Server - usage: es 8080 or es 8080 "custom message"
 function es {

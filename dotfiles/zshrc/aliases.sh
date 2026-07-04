@@ -33,3 +33,35 @@ function es {
   node ~/Projects/myconfig/echo-server/echo-server.mjs "$@"
 }
 
+# tmax - open a tmux session with a 2x2 grid of panes, all cd'd to a directory.
+# usage: tmax ~/Projects/ear-tools   (session named after the dir; -2, -3... on collision)
+#        tmax                        (uses the current directory)
+function tmax {
+  local dir="${1:-$PWD}"
+  if [[ ! -d "$dir" ]]; then
+    echo "tmax: not a directory: $dir" >&2
+    return 1
+  fi
+  dir="$(cd "$dir" && pwd)"           # absolute, normalized
+
+  local base name i=2
+  base="$(basename "$dir")"
+  name="$base"
+  while tmux has-session -t "=$name" 2>/dev/null; do
+    name="${base}-${i}"; (( i++ ))
+  done
+
+  tmux new-session -d -s "$name" -c "$dir"
+  local n
+  for n in 1 2 3; do
+    tmux split-window -c "$dir" -t "$name:0"
+    tmux select-layout -t "$name:0" tiled >/dev/null
+  done
+  tmux select-pane -t "$name:0.0"
+
+  if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "$name"     # already inside tmux
+  else
+    tmux attach-session -t "$name"
+  fi
+}

@@ -1,7 +1,8 @@
 # Aliases
 alias vi='nvim'
 alias v='nvim'
-alias cl='vt claude'
+alias cl='claude'
+alias cl-sub='env -u ANTHROPIC_API_KEY claude' # use Anthropic subscription instead of API key for this session
 alias update="source ~/.zshrc"
 alias l='lsd'
 alias ll='lsd -al'

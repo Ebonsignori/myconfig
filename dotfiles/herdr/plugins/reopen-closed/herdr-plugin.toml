@@ -1,0 +1,32 @@
+id = "reopen-closed"
+name = "Reopen Closed"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Undo for closed panes, tabs and workspaces, like a browser's reopen-closed-tab. Claude panes come back with their conversation via `claude --resume`. Bind a key to the action `reopen-closed.reopen-closed`."
+platforms = ["linux", "macos"]
+
+# Local, not vendored. herdr's close events only carry the closed id, but
+# session.json is saved ~5s after each change, so when these hooks run it still
+# holds the closed item's layout, cwd and Claude session. record snapshots that
+# onto a stack in the plugin state dir. A tab or workspace close fires only its
+# own event (no per-pane events), and closing a tab's last pane fires only
+# pane.closed.
+[[events]]
+on = "pane.closed"
+command = ["python3", "scripts/reopen_closed.py", "record"]
+
+[[events]]
+on = "tab.closed"
+command = ["python3", "scripts/reopen_closed.py", "record"]
+
+[[events]]
+on = "workspace.closed"
+command = ["python3", "scripts/reopen_closed.py", "record"]
+
+# Pops the newest record and rebuilds it.
+[[actions]]
+id = "reopen-closed"
+title = "Reopen closed pane/tab"
+description = "Reopen the most recently closed pane, tab or workspace, resuming its Claude sessions."
+contexts = ["pane"]
+command = ["python3", "scripts/reopen_closed.py", "reopen"]

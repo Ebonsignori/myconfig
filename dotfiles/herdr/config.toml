@@ -24,6 +24,14 @@ command = "confirm-close-tab.confirm-close-tab"
 type = "plugin_action"
 description = "Close tab (with confirmation)"
 
+# Undo for closes: reopens the last closed pane/tab/workspace where it was and
+# resumes its Claude sessions. Plugin is local: dotfiles/herdr/plugins/reopen-closed.
+[[keys.command]]
+key = "prefix+u"
+command = "reopen-closed.reopen-closed"
+type = "plugin_action"
+description = "Reopen closed pane/tab"
+
 [ui.toast]
 delivery = "herdr"
 

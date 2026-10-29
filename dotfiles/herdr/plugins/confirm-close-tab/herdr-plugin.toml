@@ -1,0 +1,21 @@
+id = "confirm-close-tab"
+name = "Confirm Close Tab"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Ask for confirmation before closing a tab and all its panes. Bind a key to the action `confirm-close-tab.confirm-close-tab`."
+platforms = ["linux", "macos"]
+
+# Local sibling of the vendored confirm-close-pane plugin, same two-step shape:
+# the keybound action has no TTY, so it opens an overlay pane that asks y/n.
+[[actions]]
+id = "confirm-close-tab"
+title = "Close tab (with confirmation)"
+description = "Open a y/n prompt; close the focused tab on confirmation."
+contexts = ["pane"]
+command = ["sh", "scripts/open.sh"]
+
+[[panes]]
+id = "confirm"
+title = "Close tab?"
+placement = "overlay"
+command = ["sh", "scripts/confirm.sh"]

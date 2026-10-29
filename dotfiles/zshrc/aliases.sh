@@ -88,3 +88,42 @@ function tmax {
     tmux attach-session -t "$name"
   fi
 }
+
+# herd - tmax's herdr twin: new workspace with a 2x2 pane grid, all cd'd to a dir.
+# usage: herd ~/Projects/nexus   (workspace labeled after the dir)
+#        herd                    (uses the current directory)
+# NOTE: requires an already-attached herdr server (run `herdr` first) — unlike
+#       tmux, herdr has no detached-daemon start.
+function herd {
+  local dir="${1:-$PWD}"
+  if [[ ! -d "$dir" ]]; then
+    echo "herd: not a directory: $dir" >&2
+    return 1
+  fi
+  dir="$(cd "$dir" && pwd)"
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "herd: jq is required (brew install jq)" >&2
+    return 1
+  fi
+  if [[ "$(herdr status server 2>/dev/null | awk '/status:/{print $2}')" != "running" ]]; then
+    echo "herd: no running herdr server — attach with 'herdr' first, then run herd from inside." >&2
+    return 1
+  fi
+  local base created ws p1 p2
+  base="$(basename "$dir")"
+  # herdr emits JSON; ids are base36 (e.g. wE:p1), so parse with jq — not a regex.
+  created="$(herdr workspace create --cwd "$dir" --label "$base" --focus 2>&1)"
+  ws="$(print -r -- "$created" | jq -r '.result.workspace.workspace_id // empty' 2>/dev/null)"
+  p1="$(print -r -- "$created" | jq -r '.result.root_pane.pane_id // empty' 2>/dev/null)"
+  if [[ -z "$ws" || -z "$p1" ]]; then
+    echo "herd: failed to create workspace" >&2
+    print -r -- "$created" >&2
+    return 1
+  fi
+  # Build a 2x2 grid: split first pane right -> p2, then split each column down.
+  p2="$(herdr pane split "$p1" --direction right --cwd "$dir" --no-focus 2>&1 \
+        | jq -r '.result.pane.pane_id // empty' 2>/dev/null)"
+  herdr pane split "$p1" --direction down --cwd "$dir" --no-focus >/dev/null 2>&1
+  [[ -n "$p2" ]] && herdr pane split "$p2" --direction down --cwd "$dir" --no-focus >/dev/null 2>&1
+  herdr pane focus --pane "$p1" >/dev/null 2>&1 || herdr workspace focus "$ws" >/dev/null 2>&1
+}

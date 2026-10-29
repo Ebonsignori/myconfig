@@ -1,0 +1,31 @@
+[keys]
+# Prefix key to enter prefix mode (herdr default is "ctrl+b").
+prefix = "ctrl+a"
+
+# Unbind the built-in close so the confirm-close-pane plugin can take prefix+x.
+# Without this the built-in wins and panes close with no prompt.
+close_pane = ""
+close_tab = ""
+
+# tmux-style confirm-before on pane close. Plugin lives in this repo at
+# dotfiles/herdr/plugins/confirm-close-pane and is registered by init.sh.
+[[keys.command]]
+key = "prefix+x"
+command = "confirm-close-pane.confirm-close-pane"
+type = "plugin_action"
+description = "Close pane (with confirmation)"
+
+# Same for closing a whole tab (herdr's default close_tab key). Plugin is local,
+# not vendored: dotfiles/herdr/plugins/confirm-close-tab. Closing a workspace
+# needs no plugin; herdr's built-in ui.confirm_close (default true) covers it.
+[[keys.command]]
+key = "prefix+shift+x"
+command = "confirm-close-tab.confirm-close-tab"
+type = "plugin_action"
+description = "Close tab (with confirmation)"
+
+[ui.toast]
+delivery = "herdr"
+
+[ui]
+show_agent_labels_on_pane_borders = true

@@ -29,6 +29,11 @@ NVIM_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/init.vim
 NVIM_CONFIG_PATH=~/.config/nvim/init.vim
 TMUX_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.tmux.conf
 TMUX_CONFIG_PATH=~/.tmux.conf
+HERDR_CONFIG_DIR=~/.config/herdr
+HERDR_CONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/herdr/config.toml
+HERDR_CONFIG_PATH=~/.config/herdr/config.toml
+HERDR_PLUGINS_ORIGIN_DIR=$MY_CONFIG_PROJECT_DIR/dotfiles/herdr/plugins
+HERDR_PLUGIN_REGISTRY_PATH=~/.config/herdr/plugins.json
 GLOBAL_GITCONFIG_PATH=~/.gitconfig
 GLOBAL_GITCONFIG_ORIGIN_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/.gitconfig
 ZSHRC_PATH=$MY_CONFIG_PROJECT_DIR/dotfiles/zshrc/main.sh
@@ -82,9 +87,13 @@ main() {
   # Compare dotfiles to see if any changes are made and replace them if there are changes
   create_replace_dotfile $NVIM_CONFIG_PATH $NVIM_CONFIG_ORIGIN_PATH
   create_replace_dotfile $TMUX_CONFIG_PATH $TMUX_CONFIG_ORIGIN_PATH
+  create_replace_dotfile $HERDR_CONFIG_PATH $HERDR_CONFIG_ORIGIN_PATH
   create_replace_dotfile $GLOBAL_GITCONFIG_PATH $GLOBAL_GITCONFIG_ORIGIN_PATH
   create_replace_dotfile $VIM_NERDTREE_PLUGIN_CONFIG_FILE $VIM_NERDTREE_PLUGIN_CONFIG_ORIGIN
   create_replace_dotfile $AMETHYST_PATH $AMETHYST_ORIGIN_PATH
+
+  # Register herdr plugins vendored in this repo
+  link_herdr_plugins
 
   # Copy over directories
   create_replace_directory $GIT_TEMPLATES_DIR $MY_GIT_TEMPLATES_DIR
@@ -107,7 +116,7 @@ main() {
 
 # Create all directories
 create_directories() {
-  for dir in $MY_CONFIG_DIR $MY_BIN_DIR $NVIM_CONFIG_DIR $VIM_NERDTREE_PLUGIN_CONFIG_PATH $MY_CONFIG_DIR/.vim_undo_history; do
+  for dir in $MY_CONFIG_DIR $MY_BIN_DIR $NVIM_CONFIG_DIR $HERDR_CONFIG_DIR $VIM_NERDTREE_PLUGIN_CONFIG_PATH $MY_CONFIG_DIR/.vim_undo_history; do
     create_directory $dir
   done
 }
@@ -149,6 +158,38 @@ check_prereq() {
     echo "Missing prereq: $2. Please install $2 manually via package manager."
     exit 1
   fi
+}
+
+# Register herdr plugins vendored in dotfiles/herdr/plugins. herdr keeps its
+# plugin registry per-machine in plugins.json, so this has to run on every
+# machine rather than being carried in the repo. init.sh is sourced from every
+# new shell, so skip the (comparatively slow) herdr call once a plugin is
+# already registered at its current path.
+# NOTE: herdr caches the manifest in plugins.json. After editing a plugin's
+# herdr-plugin.toml, re-link it by hand:
+#   herdr plugin link $HERDR_PLUGINS_ORIGIN_DIR/<plugin>
+link_herdr_plugins() {
+  if ! command -v herdr >/dev/null 2>&1; then
+    return 0
+  fi
+
+  for plugin_dir in $(find $HERDR_PLUGINS_ORIGIN_DIR -mindepth 1 -maxdepth 1 -type d 2>/dev/null); do
+    # A plugin directory is one with a manifest in it
+    if [ ! -f $plugin_dir/herdr-plugin.toml ]; then
+      continue
+    fi
+
+    # Already registered at this exact path, nothing to do
+    if grep -qs "\"$plugin_dir\"" $HERDR_PLUGIN_REGISTRY_PATH; then
+      continue
+    fi
+
+    if herdr plugin link $plugin_dir >/dev/null 2>&1; then
+      echo "Linked herdr plugin '$(basename $plugin_dir)'"
+    else
+      echo "Failed to link herdr plugin '$(basename $plugin_dir)'"
+    fi
+  done
 }
 
 # $1 = destination of .dotfile (dir must already exist)

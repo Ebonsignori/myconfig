@@ -1,0 +1,22 @@
+# LiteLLM proxy for `cl-venice`: translates Claude Code's Anthropic /v1/messages
+# calls into Venice's OpenAI-compatible API. Key comes from $VENICE_API_KEY.
+x-venice: &venice
+  api_base: https://api.venice.ai/api/v1
+  api_key: os.environ/VENICE_API_KEY
+  extra_body:
+    venice_parameters:
+      include_venice_system_prompt: false
+
+model_list:
+  - model_name: qwen-3-8-flash
+    litellm_params: { <<: *venice, model: openai/qwen-3-8-flash }
+  - model_name: qwen-3-8-max
+    litellm_params: { <<: *venice, model: openai/qwen-3-8-max }
+  - model_name: qwen3-coder-480b
+    litellm_params: { <<: *venice, model: openai/qwen3-coder-480b-a35b-instruct-turbo }
+  # Anything Claude Code asks for by a Claude name falls back to flash
+  - model_name: "claude-*"
+    litellm_params: { <<: *venice, model: openai/qwen-3-8-flash }
+
+litellm_settings:
+  drop_params: true

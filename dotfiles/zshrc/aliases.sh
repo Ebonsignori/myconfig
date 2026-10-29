@@ -2,7 +2,29 @@
 alias vi='nvim'
 alias v='nvim'
 alias cl='claude'
-alias cl-sub='env -u ANTHROPIC_API_KEY claude' # use Anthropic subscription instead of API key for this session
+alias cl-sub='claude --settings ~/.claude/settings-sub.json' # real Anthropic subscription (bypasses copilot-api proxy); needed for Fable 5 etc.
+alias cl-figma='claude --mcp-config ~/.claude/mcp-figma.json' # loads the Figma MCP on demand (docs-internal brand-migration work)
+# Claude Code on Venice AI (Qwen) via a local LiteLLM proxy on :4142 (started on demand).
+# Key: $VENICE_API_KEY, else Keychain: security add-generic-password -a "$USER" -s venice-api-key -w
+cl-venice() {
+  local key="${VENICE_API_KEY:-$(security find-generic-password -s venice-api-key -w 2>/dev/null)}"
+  if [ -z "$key" ]; then
+    echo "cl-venice: no Venice key; set VENICE_API_KEY or add Keychain item 'venice-api-key'" >&2
+    return 1
+  fi
+  if ! curl -sf -o /dev/null http://localhost:4142/health/liveliness; then
+    echo "cl-venice: starting LiteLLM proxy (log: ~/.cache/litellm-venice.log)..."
+    mkdir -p ~/.cache
+    VENICE_API_KEY="$key" nohup litellm --config "$MY_CONFIG_PROJECT_DIR/dotfiles/litellm/venice.yaml" \
+      --host 127.0.0.1 --port 4142 >~/.cache/litellm-venice.log 2>&1 &!
+    local i
+    for i in {1..60}; do
+      curl -sf -o /dev/null http://localhost:4142/health/liveliness && break
+      sleep 0.5
+    done
+  fi
+  claude --settings ~/.claude/settings-venice.json "$@"
+}
 alias update="source ~/.zshrc"
 alias l='lsd'
 alias ll='lsd -al'
